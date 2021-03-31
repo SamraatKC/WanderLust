@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using WanderLust.Models.CommonModels;
 using WanderLust.Models.DataModels;
 
 namespace WanderLust
@@ -32,7 +33,13 @@ namespace WanderLust
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.Configure<AppSettings>(Configuration.GetSection("ConnectionStrings"));
+            services.Configure<AppSettings>(Configuration.GetSection("appSettings"));
+            services.AddCors();
+            services.AddControllers()
+            .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddMvc();
             services.AddSwaggerGen(c =>
             {
                              
@@ -41,7 +48,6 @@ namespace WanderLust
             });
 
             string connectionString = Configuration.GetConnectionString("DefaultConnectionString");
-
             services.AddDbContext<ApplicationDbContext>(config =>
             {
                 config.UseSqlServer(connectionString, b => b.MigrationsAssembly("WanderLust"));
@@ -85,10 +91,7 @@ namespace WanderLust
                 });
 
             #endregion
-
-
-
-            services.AddControllers();
+                                            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -110,13 +113,28 @@ namespace WanderLust
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
+            #region Enable Cors
+            app.UseCors(x => x.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+            #endregion
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+            UpdateDatabase(app);
+        }
+
+        private static void UpdateDatabase(IApplicationBuilder app)
+        {
+            var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope();
+            var context = serviceScope.ServiceProvider
+                .GetService<ApplicationDbContext>();
+            context.Database.Migrate();
         }
     }
 }
