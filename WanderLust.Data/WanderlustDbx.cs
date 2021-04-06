@@ -20,8 +20,33 @@ namespace WanderLust.Data
             optionsBuilder.UseSqlServer(appSettings.DefaultConnectionString);
         }
 
+        protected override void OnModelCreating(ModelBuilder mb)
+        {
+            mb.Entity<Content>(entity =>
+            {
+                entity.HasKey(e => new { e.ContentId });
+                entity.Property(x => x.ContentId).ValueGeneratedOnAdd();
+                entity.HasOne(p => p.Home)
+                .WithMany(p => p.Content)
+                .HasForeignKey(p=>p.HomeIdFK);
+
+
+            });
+
+            mb.Entity<Home>(entity =>
+            {
+                entity.HasKey(e => new { e.HomeId });
+                entity.Property(x => x.HomeId).ValueGeneratedOnAdd();
+                //entity.HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            });
+
+
+        }
+
 
         public DbSet<AspNetUser> AspNetUsers { get; set; }
+        public DbSet<Home> Home { get; set; }
+        public DbSet<Content> Content { get; set; }
 
     }
 }

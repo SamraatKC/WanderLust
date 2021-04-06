@@ -17,5 +17,7 @@ namespace WanderLust.Models.CommonModels
         public static string DuplicateRole { get { return "Role with same name already exist. Please use different name"; } }
         public static string RoleNotFound { get { return "Role you are trying to use does not exits"; } }
         public static string RoleDeleted { get { return "Role successfully deleted"; } }
+        public static string SectionAdded { get { return "Section successfully added"; } }
+        public static string ContentAdded { get { return "Content successfully added"; } }
     }
 }

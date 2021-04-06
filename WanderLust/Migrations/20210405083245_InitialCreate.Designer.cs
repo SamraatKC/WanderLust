@@ -10,8 +10,8 @@ using WanderLust.Models.DataModels;
 namespace WanderLust.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210330101529_SecondCreate")]
-    partial class SecondCreate
+    [Migration("20210405083245_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
