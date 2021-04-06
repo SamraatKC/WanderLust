@@ -36,3 +36,6 @@ msbuild.wrn
 #ignore Migrations
 [Mm]igration/
 [Mm]igrations/
+
+#ignore v16
+[Vv]16/
