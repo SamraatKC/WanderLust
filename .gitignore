@@ -34,5 +34,5 @@ msbuild.wrn
 .vs/
 
 #ignore Migrations
-#[Mm]igration/
-#[Mm]igrations/
+[Mm]igration/
+[Mm]igrations/
