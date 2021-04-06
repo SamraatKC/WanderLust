@@ -89,5 +89,30 @@ namespace WanderLust.Controllers
             }
 
         }
+
+        [HttpPost]
+        [Route("DeleteContentById")]
+        public async Task<ApiResponse> DeleteContentById(int id)
+        {
+            try
+            {
+
+                // home.Content = null;
+
+                var result = await contentService.DeleteContentById(id);
+
+                if (result)
+                {
+
+                    return new ApiResponse(CustomResponseMessage.ContentDeleted);
+                }
+                return new ApiResponse(CustomResponseMessage.InternalServerError);
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse(CustomResponseMessage.InternalServerError, StatusCodes.Status500InternalServerError);
+            }
+
+        }
     }
 }

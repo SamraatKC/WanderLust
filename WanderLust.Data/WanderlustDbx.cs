@@ -28,7 +28,10 @@ namespace WanderLust.Data
                 entity.Property(x => x.ContentId).ValueGeneratedOnAdd();
                 entity.HasOne(p => p.Home)
                 .WithMany(p => p.Content)
-                .HasForeignKey(p=>p.HomeIdFK);
+                .HasForeignKey(p=>p.HomeIdFK)
+                .IsRequired(true)
+                .OnDelete(DeleteBehavior.Cascade);
+                
 
 
             });
@@ -37,6 +40,7 @@ namespace WanderLust.Data
             {
                 entity.HasKey(e => new { e.HomeId });
                 entity.Property(x => x.HomeId).ValueGeneratedOnAdd();
+                
                 //entity.HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             });
 

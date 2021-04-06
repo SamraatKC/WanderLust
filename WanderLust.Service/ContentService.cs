@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WanderLust.Data;
@@ -37,6 +38,16 @@ namespace WanderLust.Service
         {
             var res = await db.Content.FindAsync(id);
             return res;
+        }
+
+        public async Task<bool> DeleteContentById(int id)
+        {
+
+            var contentId = db.Content.OrderBy(e => e.ContentId).Include(e => e.Home).Where(a => a.ContentId == id).FirstOrDefault();
+            db.Content.Remove(contentId);
+            await db.SaveChangesAsync();
+            return true;
+
         }
     }
 }

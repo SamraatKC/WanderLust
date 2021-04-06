@@ -40,6 +40,16 @@ namespace WanderLust.Service
             return res;
         }
 
+        public async Task<bool>DeleteSectionById(int id)
+        {
+            
+            var homeId = db.Home.OrderBy(e=>e.HomeId).Include(e=>e.Content).Where(a => a.HomeId == id).FirstOrDefault();
+            db.Home.Remove(homeId);
+            await db.SaveChangesAsync();
+            return true;
+
+        }
+
         
 
     }
