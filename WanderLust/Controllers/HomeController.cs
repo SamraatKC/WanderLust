@@ -45,14 +45,14 @@ namespace WanderLust.Controllers
             {
 
                 home.Content = null;
-                
-                var result = await services.AddSection(home);
-
+               
+                  var result = await services.AddSection(home);
                 if (result)
                 {
-                  
+
                     return new ApiResponse(CustomResponseMessage.SectionAdded);
                 }
+                   
                 return new ApiResponse(CustomResponseMessage.InternalServerError);
             }
             catch (Exception ex)
@@ -60,6 +60,25 @@ namespace WanderLust.Controllers
                 return new ApiResponse(CustomResponseMessage.InternalServerError, StatusCodes.Status500InternalServerError);
             }
 
+        }
+
+        [HttpPost]
+        [Route("UpdateSection")]
+        public async Task<Home> UpdateSection(int id,Home home)
+        {
+            //Home home = new Home();
+            home.Content = null;
+           
+                
+                var result = await services.FindSectionById(id);
+                if(result!=null)
+                {
+                    return await services.UpdateSection(id,home);
+                }
+            return null;
+               
+           
+           
         }
 
         [HttpGet]
@@ -96,17 +115,18 @@ namespace WanderLust.Controllers
         {
             try
             {
+                bool checkDependency =  services.CheckSectionDependencies(id);
+                if(checkDependency==true)
+                { 
+                    var result = await services.DeleteSectionById(id);
+                    if (result)
+                    {
 
-               // home.Content = null;
-
-                var result  = await services.DeleteSectionById(id);
-
-                if (result)
-                {
-
-                    return new ApiResponse(CustomResponseMessage.SectionDeleted);
+                        return new ApiResponse(CustomResponseMessage.SectionDeleted);
+                    }
                 }
-                return new ApiResponse(CustomResponseMessage.InternalServerError);
+
+                return new ApiResponse(CustomResponseMessage.SectionDeletionError);
             }
             catch (Exception ex)
             {

@@ -28,6 +28,25 @@ namespace WanderLust.Service
 
         }
 
+        public async Task<Content> UpdateContent(int id, Content content)
+        {
+
+            var result = await db.Content.FirstOrDefaultAsync(e => e.ContentId == id);
+            if (result != null)
+            {
+
+                result.Title = content.Title;
+                result.SubTitle = content.SubTitle;
+                result.Description = content.Description;
+                result.HomeIdFK = content.HomeIdFK;
+                result.Graphics = content.Graphics;
+                result.SubsectionName = content.SubsectionName;
+                await db.SaveChangesAsync();
+                return result;
+            }
+            return null;
+        }
+
         public async Task<List<Content>> GetAllContent()
         {
             return await db.Content.ToListAsync();
@@ -48,6 +67,16 @@ namespace WanderLust.Service
             await db.SaveChangesAsync();
             return true;
 
+        }
+
+        public bool CheckContentDependencies(int id)
+        {
+            var count = db.Content.Count(u => u.ContentId == id);
+            if (count == 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

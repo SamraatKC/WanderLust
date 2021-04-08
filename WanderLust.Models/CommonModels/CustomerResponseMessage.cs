@@ -18,8 +18,11 @@ namespace WanderLust.Models.CommonModels
         public static string RoleNotFound { get { return "Role you are trying to use does not exits"; } }
         public static string RoleDeleted { get { return "Role successfully deleted"; } }
         public static string SectionAdded { get { return "Section successfully added"; } }
+        public static string SectionUpdated { get { return "Section successfully updated"; } }
         public static string SectionDeleted { get { return "Section successfully deleted"; } }
+        public static string SectionDeletionError { get { return "The data you are trying to delete has foreign key reference with Content table."; } }
         public static string ContentAdded { get { return "Content successfully added"; } }
         public static string ContentDeleted { get { return "Content successfully deleted"; } }
+        public static string ContentDeletionError { get { return "The data you are trying to delete has dependency with other table."; } }
     }
 }

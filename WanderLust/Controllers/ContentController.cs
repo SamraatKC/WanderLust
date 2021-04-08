@@ -62,6 +62,19 @@ namespace WanderLust.Controllers
 
         }
 
+        [HttpPost]
+        [Route("UpdateContent")]
+        public async Task<Content> UpdateSection(int id, Content content)
+        {
+            content.Home = null;
+            var result = await contentService.FindContentById(id);
+            if (result != null)
+            {
+                return await contentService.UpdateContent(id, content);
+            }
+            return null;
+        }
+
         [HttpGet]
         [Route("GetAllContent")]
         public async Task<List<Content>> GetAllContent()
@@ -96,17 +109,18 @@ namespace WanderLust.Controllers
         {
             try
             {
-
-                // home.Content = null;
-
-                var result = await contentService.DeleteContentById(id);
-
-                if (result)
+                bool checkDependency = contentService.CheckContentDependencies(id);
+                if (checkDependency == true)
                 {
+                    var result = await contentService.DeleteContentById(id);
 
-                    return new ApiResponse(CustomResponseMessage.ContentDeleted);
+                    if (result)
+                    {
+
+                        return new ApiResponse(CustomResponseMessage.ContentDeleted);
+                    }
                 }
-                return new ApiResponse(CustomResponseMessage.InternalServerError);
+                return new ApiResponse(CustomResponseMessage.ContentDeletionError);
             }
             catch (Exception ex)
             {
