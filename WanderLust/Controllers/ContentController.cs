@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoWrapper.Wrappers;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +26,8 @@ namespace WanderLust.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
-        public ContentController(IOptions<AppSettings> _appSettings,
+        private IWebHostEnvironment webHostEnvironment;
+        public ContentController(IWebHostEnvironment _webHostEnvironment, IOptions<AppSettings> _appSettings,
             UserManager<ApplicationUser> _userManager,
             SignInManager<ApplicationUser> _signInManager,
             RoleManager<IdentityRole> _roleManager)
@@ -35,24 +38,48 @@ namespace WanderLust.Controllers
             signInManager = _signInManager;
             roleManager = _roleManager;
             db = new WanderlustDbx(_appSettings);
+            webHostEnvironment = _webHostEnvironment;
 
         }
 
         [HttpPost]
         [Route("AddContent")]
-        public async Task<ApiResponse> AddContent(Content content)
+        public async Task<ApiResponse> AddContent([FromForm]Content content)
         {
             try
             {
-
+                
                 content.Home = null;
-                var result = await contentService.AddContent(content);
-
-                if (result)
+                #region saveimage
+                var graphics = HttpContext.Request.Form.Files;       
+                foreach (var Graphics in graphics)
                 {
+                    if (Graphics != null && Graphics.Length > 0)
+                    {
+                        var file = Graphics;
+                        //There is an error here
+                        var uploads = webHostEnvironment.WebRootPath + "\\Uploads\\";
+                        if (file.Length > 0)
+                        {
+                            var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+                            using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+                            {
+                                await file.CopyToAsync(fileStream);
+                                string filePath = "\\Uploads\\" + fileName;
+                                string baseUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
+                                content.GraphicsURL = fileName;
+                            }
 
+                        }
+                    }
+                }
+                #endregion
+                var result = await contentService.AddContent(content);
+                if (result==true)
+                {
                     return new ApiResponse(CustomResponseMessage.ContentAdded);
                 }
+              
                 return new ApiResponse(CustomResponseMessage.InternalServerError);
             }
             catch (Exception ex)
@@ -64,15 +91,38 @@ namespace WanderLust.Controllers
 
         [HttpPost]
         [Route("UpdateContent")]
-        public async Task<Content> UpdateSection(int id, Content content)
+        public async Task<ApiResponse> UpdateContent([FromForm] Content content)
         {
             content.Home = null;
+            int id = content.ContentId;
             var result = await contentService.FindContentById(id);
             if (result != null)
             {
-                return await contentService.UpdateContent(id, content);
+                var graphics = HttpContext.Request.Form.Files;
+                foreach (var Graphics in graphics)
+                {
+                    if (Graphics != null && Graphics.Length > 0)
+                    {
+                        var file = Graphics;
+                        //There is an error here
+                        var uploads = webHostEnvironment.WebRootPath + "\\Uploads\\";
+                        if (file.Length > 0)
+                        {
+                            var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+                            using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+                            {
+                                await file.CopyToAsync(fileStream);
+                                string filePath = "\\Uploads\\" + fileName;
+                                string baseUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
+                                content.GraphicsURL = fileName;
+                            }
+
+                        }
+                    }
+                }
+                await contentService.UpdateContent(content);
             }
-            return null;
+            return new ApiResponse(CustomResponseMessage.ContentUpdated);
         }
 
         [HttpGet]

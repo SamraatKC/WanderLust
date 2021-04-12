@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -23,24 +25,43 @@ namespace WanderLust.Service
 
         public async Task<bool> AddContent(Content content)
         {
-            await db.Content.AddAsync(content);
-            return db.SaveChanges() > 0;
+            Content result = new Content()
+            {
+            //ContentId=content.ContentId,
+            Title = content.Title,
+            SubTitle = content.SubTitle,
+            Description = content.Description,
+            HomeIdFK = content.HomeIdFK,
+            GraphicsURL = content.GraphicsURL,
+            SubsectionName = content.SubsectionName,
+            ContentType=content.ContentType
+            };
+            if(result.ContentId>=0)
+            { 
+            await db.Content.AddAsync(result);
+            await db.SaveChangesAsync();
+            }
+            else
+            {
+                return false;
+            }
+            return true;
 
         }
 
-        public async Task<Content> UpdateContent(int id, Content content)
+        public async Task<Content> UpdateContent(Content content)
         {
-
+            int id=content.ContentId;
             var result = await db.Content.FirstOrDefaultAsync(e => e.ContentId == id);
             if (result != null)
             {
-
                 result.Title = content.Title;
                 result.SubTitle = content.SubTitle;
                 result.Description = content.Description;
                 result.HomeIdFK = content.HomeIdFK;
-                result.Graphics = content.Graphics;
+                result.GraphicsURL = content.GraphicsURL;
                 result.SubsectionName = content.SubsectionName;
+                result.ContentType = content.ContentType;
                 await db.SaveChangesAsync();
                 return result;
             }
@@ -61,7 +82,6 @@ namespace WanderLust.Service
 
         public async Task<bool> DeleteContentById(int id)
         {
-
             var contentId = db.Content.OrderBy(e => e.ContentId).Include(e => e.Home).Where(a => a.ContentId == id).FirstOrDefault();
             db.Content.Remove(contentId);
             await db.SaveChangesAsync();

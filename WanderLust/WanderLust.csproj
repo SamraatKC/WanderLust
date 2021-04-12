@@ -31,5 +31,10 @@
     <ProjectReference Include="..\WanderLust.Service\WanderLust.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\Uploads\" />
+  </ItemGroup>
+
 
 </Project>

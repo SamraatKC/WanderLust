@@ -64,7 +64,7 @@ namespace WanderLust.Controllers
 
         [HttpPost]
         [Route("UpdateSection")]
-        public async Task<Home> UpdateSection(int id,Home home)
+        public async Task<ApiResponse> UpdateSection(int id,Home home)
         {
             //Home home = new Home();
             home.Content = null;
@@ -73,12 +73,12 @@ namespace WanderLust.Controllers
                 var result = await services.FindSectionById(id);
                 if(result!=null)
                 {
-                    return await services.UpdateSection(id,home);
+                     await services.UpdateSection(id,home);
                 }
-            return null;
-               
-           
-           
+            return new ApiResponse(CustomResponseMessage.SectionUpdated);
+
+
+
         }
 
         [HttpGet]

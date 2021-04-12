@@ -39,8 +39,7 @@ namespace WanderLust.Data
             mb.Entity<Home>(entity =>
             {
                 entity.HasKey(e => new { e.HomeId });
-                entity.Property(x => x.HomeId).ValueGeneratedOnAdd();
-                
+                entity.Property(x => x.HomeId).ValueGeneratedOnAdd();           
                 //entity.HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             });
 

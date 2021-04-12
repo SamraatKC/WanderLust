@@ -141,6 +141,7 @@ namespace WanderLust
                 .AllowAnyMethod()
                 .AllowAnyHeader());
             #endregion
+            app.UseStaticFiles();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
