@@ -13,7 +13,8 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       //"launchUrl": "weatherforecast",
-      "launchUrl": "http://localhost:64773/swagger",
+      //"launchUrl": "http://localhost:64773/swagger",
+      "launchUrl": "http://localhost:64773/index.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
