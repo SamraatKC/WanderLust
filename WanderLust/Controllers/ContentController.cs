@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 using WanderLust.Data;
 using WanderLust.Models.CommonModels;
 using WanderLust.Models.DataModels;
+using WanderLust.Models.ViewModels;
 using WanderLust.Service;
 
 namespace WanderLust.Controllers
@@ -44,13 +45,14 @@ namespace WanderLust.Controllers
 
         [HttpPost]
         [Route("AddContent")]
-        public async Task<ApiResponse> AddContent([FromForm]Content content)
+        public async Task<ApiResponse> AddContent([FromForm]ContentViewModel contentViewModel)
         {
             try
             {
                 
-                content.Home = null;
+                //content.Home = null;
                 #region saveimage
+                if()
                 var graphics = HttpContext.Request.Form.Files;       
                 foreach (var Graphics in graphics)
                 {
@@ -67,14 +69,14 @@ namespace WanderLust.Controllers
                                 await file.CopyToAsync(fileStream);
                                 string filePath = "\\Uploads\\" + fileName;
                                 string baseUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
-                                content.GraphicsURL = fileName;
+                                contentViewModel.GraphicsURL = fileName;
                             }
 
                         }
                     }
                 }
                 #endregion
-                var result = await contentService.AddContent(content);
+                var result = await contentService.AddContent(contentViewModel);
                 if (result==true)
                 {
                     return new ApiResponse(CustomResponseMessage.ContentAdded);

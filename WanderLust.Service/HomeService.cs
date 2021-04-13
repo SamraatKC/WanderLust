@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using WanderLust.Data;
 using WanderLust.Models.CommonModels;
 using WanderLust.Models.DataModels;
+using WanderLust.Models.ViewModels;
 
 namespace WanderLust.Service
 {
@@ -29,27 +30,31 @@ namespace WanderLust.Service
 
 
 
-        public async Task<bool> AddSection(Home home)
+        public async Task<bool> AddSection(HomeViewModel homeViewModel)
         {
-           await db.Home.AddAsync(home);
+            Home home = new Home();
+             home.Content = null;
+            home.Section = homeViewModel.Section;
+            home.ThemeType = homeViewModel.ThemeType;
+            await db.Home.AddAsync(home);
             return db.SaveChanges() > 0;
            
         }
 
-        public async Task<Home> UpdateSection(int id,Home home)
+        public async Task<bool> UpdateSection(int id,HomeViewModel homeViewModel)
         {
-            
-            var result = await db.Home.FirstOrDefaultAsync(e => e.HomeId == id);
-            if(result!=null)
+
+            //Home home = new Home();
+            var homeId = await db.Home.FirstOrDefaultAsync(e => e.HomeId == id);
+            if (homeId != null)
             {
-               
-                result.Section = home.Section;
-                result.ThemeType = home.ThemeType;
-                //db.Update(home);
-                await db.SaveChangesAsync();
-                return result;
+                homeId.Content = null;
+                homeId.Section = homeViewModel.Section;
+                homeId.ThemeType = homeViewModel.ThemeType;
+                return  db.SaveChanges()>0;
+                //return home;
             }
-            return null;
+            return false;
         }
 
         public async Task<List<Home>> GetAllSection()

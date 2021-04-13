@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 using WanderLust.Data;
 using WanderLust.Models.CommonModels;
 using WanderLust.Models.DataModels;
+using WanderLust.Models.ViewModels;
 using WanderLust.Service;
 
 namespace WanderLust.Controllers
@@ -39,14 +40,14 @@ namespace WanderLust.Controllers
         }
         [HttpPost]
         [Route("AddSection")]
-        public async Task<ApiResponse> AddSection(Home home)
+        public async Task<ApiResponse> AddSection(HomeViewModel homeViewModel)
         {
             try
             {
 
-                home.Content = null;
+                //home.Content = null;
                
-                  var result = await services.AddSection(home);
+                  var result = await services.AddSection(homeViewModel);
                 if (result)
                 {
 
@@ -64,16 +65,17 @@ namespace WanderLust.Controllers
 
         [HttpPost]
         [Route("UpdateSection")]
-        public async Task<ApiResponse> UpdateSection(int id,Home home)
+        public async Task<ApiResponse> UpdateSection(int id,HomeViewModel homeViewModel)
         {
             //Home home = new Home();
-            home.Content = null;
-           
-                
-                var result = await services.FindSectionById(id);
-                if(result!=null)
-                {
-                     await services.UpdateSection(id,home);
+            //home.Content = null;
+
+
+            var result = await services.FindSectionById(id);
+            if (result != null)
+            {
+                await services.UpdateSection(id,homeViewModel);
+
                 }
             return new ApiResponse(CustomResponseMessage.SectionUpdated);
 

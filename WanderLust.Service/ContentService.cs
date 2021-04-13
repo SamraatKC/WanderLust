@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using WanderLust.Data;
 using WanderLust.Models.CommonModels;
 using WanderLust.Models.DataModels;
+using WanderLust.Models.ViewModels;
 
 namespace WanderLust.Service
 {
@@ -23,18 +24,18 @@ namespace WanderLust.Service
             db = new WanderlustDbx(_appSettings);
         }
 
-        public async Task<bool> AddContent(Content content)
+        public async Task<bool> AddContent(ContentViewModel contentViewModel)
         {
             Content result = new Content()
             {
             //ContentId=content.ContentId,
-            Title = content.Title,
-            SubTitle = content.SubTitle,
-            Description = content.Description,
-            HomeIdFK = content.HomeIdFK,
-            GraphicsURL = content.GraphicsURL,
-            SubsectionName = content.SubsectionName,
-            ContentType=content.ContentType
+            Title = contentViewModel.Title,
+            SubTitle = contentViewModel.SubTitle,
+            Description = contentViewModel.Description,
+            HomeIdFK = contentViewModel.HomeIdFK,
+            GraphicsURL = contentViewModel.GraphicsURL,
+            //SubsectionName = contentViewModel.SubsectionName,
+            //ContentType= contentViewModel.ContentType
             };
             if(result.ContentId>=0)
             { 

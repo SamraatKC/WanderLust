@@ -35,7 +35,7 @@ namespace WanderLust
         {
             services.Configure<AppSettings>(Configuration.GetSection("ConnectionStrings"));
             services.Configure<AppSettings>(Configuration.GetSection("appSettings"));
-            services.AddCors();
+            services.AddCors(c=> { c.AddPolicy("AllowOrigin", x => x.AllowAnyOrigin()); });
             services.AddControllers()
             .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
