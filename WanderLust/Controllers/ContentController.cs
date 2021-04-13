@@ -43,53 +43,53 @@ namespace WanderLust.Controllers
 
         }
 
-        [HttpPost]
-        [Route("AddContent")]
-        public async Task<ApiResponse> AddContent([FromForm]ContentViewModel contentViewModel)
-        {
-            try
-            {
+        //[HttpPost]
+        //[Route("AddContent")]
+        //public async Task<ApiResponse> AddContent([FromForm]ContentViewModel contentViewModel)
+        //{
+        //    try
+        //    {
                 
-                //content.Home = null;
-                #region saveimage
-                if()
-                var graphics = HttpContext.Request.Form.Files;       
-                foreach (var Graphics in graphics)
-                {
-                    if (Graphics != null && Graphics.Length > 0)
-                    {
-                        var file = Graphics;
-                        //There is an error here
-                        var uploads = webHostEnvironment.WebRootPath + "\\Uploads\\";
-                        if (file.Length > 0)
-                        {
-                            var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
-                            using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
-                            {
-                                await file.CopyToAsync(fileStream);
-                                string filePath = "\\Uploads\\" + fileName;
-                                string baseUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
-                                contentViewModel.GraphicsURL = fileName;
-                            }
+        //        //content.Home = null;
+        //        #region saveimage
+        //        if()
+        //        var graphics = HttpContext.Request.Form.Files;       
+        //        foreach (var Graphics in graphics)
+        //        {
+        //            if (Graphics != null && Graphics.Length > 0)
+        //            {
+        //                var file = Graphics;
+        //                //There is an error here
+        //                var uploads = webHostEnvironment.WebRootPath + "\\Uploads\\";
+        //                if (file.Length > 0)
+        //                {
+        //                    var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+        //                    using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+        //                    {
+        //                        await file.CopyToAsync(fileStream);
+        //                        string filePath = "\\Uploads\\" + fileName;
+        //                        string baseUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
+        //                        contentViewModel.GraphicsURL = fileName;
+        //                    }
 
-                        }
-                    }
-                }
-                #endregion
-                var result = await contentService.AddContent(contentViewModel);
-                if (result==true)
-                {
-                    return new ApiResponse(CustomResponseMessage.ContentAdded);
-                }
+        //                }
+        //            }
+        //        }
+        //        #endregion
+        //        var result = await contentService.AddContent(contentViewModel);
+        //        if (result==true)
+        //        {
+        //            return new ApiResponse(CustomResponseMessage.ContentAdded);
+        //        }
               
-                return new ApiResponse(CustomResponseMessage.InternalServerError);
-            }
-            catch (Exception ex)
-            {
-                return new ApiResponse(CustomResponseMessage.InternalServerError, StatusCodes.Status500InternalServerError);
-            }
+        //        return new ApiResponse(CustomResponseMessage.InternalServerError);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new ApiResponse(CustomResponseMessage.InternalServerError, StatusCodes.Status500InternalServerError);
+        //    }
 
-        }
+        //}
 
         [HttpPost]
         [Route("UpdateContent")]

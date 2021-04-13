@@ -24,31 +24,31 @@ namespace WanderLust.Service
             db = new WanderlustDbx(_appSettings);
         }
 
-        public async Task<bool> AddContent(ContentViewModel contentViewModel)
-        {
-            Content result = new Content()
-            {
-            //ContentId=content.ContentId,
-            Title = contentViewModel.Title,
-            SubTitle = contentViewModel.SubTitle,
-            Description = contentViewModel.Description,
-            HomeIdFK = contentViewModel.HomeIdFK,
-            GraphicsURL = contentViewModel.GraphicsURL,
-            //SubsectionName = contentViewModel.SubsectionName,
-            //ContentType= contentViewModel.ContentType
-            };
-            if(result.ContentId>=0)
-            { 
-            await db.Content.AddAsync(result);
-            await db.SaveChangesAsync();
-            }
-            else
-            {
-                return false;
-            }
-            return true;
+        //public async Task<bool> AddContent(ContentViewModel contentViewModel)
+        //{
+        //    Content result = new Content()
+        //    {
+        //    //ContentId=content.ContentId,
+        //    Title = contentViewModel.Title,
+        //    SubTitle = contentViewModel.SubTitle,
+        //    Description = contentViewModel.Description,
+        //    HomeIdFK = contentViewModel.HomeIdFK,
+        //    GraphicsURL = contentViewModel.GraphicsURL,
+        //    //SubsectionName = contentViewModel.SubsectionName,
+        //    //ContentType= contentViewModel.ContentType
+        //    };
+        //    if(result.ContentId>=0)
+        //    { 
+        //    await db.Content.AddAsync(result);
+        //    await db.SaveChangesAsync();
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //    return true;
 
-        }
+        //}
 
         public async Task<Content> UpdateContent(Content content)
         {
