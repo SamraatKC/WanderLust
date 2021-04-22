@@ -21,7 +21,7 @@ namespace WanderLust.Models.DataModels
         public IFormFile Graphics { get; set; }       
         public string SubsectionName { get; set; }
         public string ContentType { get; set; }
-        public int Ratings { get; set; }
+        public int? Ratings { get; set; }
         public Home Home { get; set; }
     }
 }

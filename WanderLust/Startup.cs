@@ -142,7 +142,7 @@ namespace WanderLust
             app.UseHttpsRedirection();
             #region Enable Cors
             app.UseCors("CorsPolicy");
-            app.UseMiddleware<CORMiddleware>();
+            //app.UseMiddleware<CORMiddleware>();
             #endregion
             app.UseRouting();         
             app.UseAuthorization();                    

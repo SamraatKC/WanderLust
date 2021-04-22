@@ -44,10 +44,7 @@ namespace WanderLust.Controllers
         {
             try
             {
-
-                //home.Content = null;
-               
-                  var result = await services.AddSection(homeViewModel);
+                var result = await services.AddSection(homeViewModel);
                 if (result)
                 {
 

@@ -197,7 +197,14 @@ namespace WanderLust.Controllers
         [Route("GetAllContent")]
         public async Task<List<Content>> GetAllContent()
         {
-            return await contentService.GetAllContent();
+            try
+            {
+                return await contentService.GetAllContent();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         [HttpGet]
