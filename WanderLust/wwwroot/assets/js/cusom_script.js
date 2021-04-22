@@ -4,8 +4,8 @@
 //message: Issue occured on ui animation initilization on pages like home, aboutus ...etc. so script $(function(){})); need modification. 
 //To To fix the issue $(function(){}) is omited and initCustomScriptForAngular = function(){...}; is introduced, after introduction initCustomScriptForAngular = function(){...} which is invoked from ngOnInit() from pages like home, about as, all the ui animation related issues has been fixed. 
 
-var initCustomScriptForAngular = function() {
-//$(function() {
+var initCustomScriptForAngular = function() {};
+$(function() {
     /*----------------------------------------------------*/
     /* MOBILE DETECT FUNCTION
     /*----------------------------------------------------*/
@@ -467,7 +467,7 @@ var initCustomScriptForAngular = function() {
       }
     }
   
-};
+});
   //}); //
   $(window).on("load", function() {
       //
@@ -475,3 +475,5 @@ var initCustomScriptForAngular = function() {
   
   
   }); //
+
+  
