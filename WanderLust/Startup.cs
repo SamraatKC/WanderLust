@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +18,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using WanderLust.MiddleWare;
 using WanderLust.Models.CommonModels;
 using WanderLust.Models.DataModels;
 
@@ -32,15 +35,25 @@ namespace WanderLust
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {           
             services.Configure<AppSettings>(Configuration.GetSection("ConnectionStrings"));
             services.Configure<AppSettings>(Configuration.GetSection("appSettings"));
-            services.AddCors(c=> { c.AddPolicy("AllowOrigin", x => x.AllowAnyOrigin()); });
-            services.AddControllers()
+            #region CorsPolicy
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                  "CorsPolicy",
+                  builder => builder.WithOrigins("http://localhost:64773")
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials());
+            });
+            services.AddAuthentication(IISDefaults.AuthenticationScheme);
+            #endregion
+            services.AddControllers(x => x.AllowEmptyInputInBodyModelBinding = true)
             .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddMvc();
-
             services.AddSwaggerGen(c =>
             {
                 // add JWT Authentication on Swashbuckel API UI
@@ -64,16 +77,12 @@ namespace WanderLust
                     {
                         {securityScheme, new string[] { }}
                     });
-            });
-
-            
-
+            });          
             string connectionString = Configuration.GetConnectionString("DefaultConnectionString");
             services.AddDbContext<ApplicationDbContext>(config =>
             {
                 config.UseSqlServer(connectionString, b => b.MigrationsAssembly("WanderLust"));
             });
-
             #region configure AspNetIdentity
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -88,7 +97,6 @@ namespace WanderLust
             });
 
             #endregion
-
             #region configure JWT bearer configuration
 
             var key_phrase = Configuration.GetSection("AppSettings:JwtKey").Value;
@@ -122,7 +130,6 @@ namespace WanderLust
             {
                 app.UseDeveloperExceptionPage();
             }
-
             #region use swagger ui, to test the api endpoints
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -130,33 +137,29 @@ namespace WanderLust
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Wanderlust API");
             });
             #endregion
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
             app.UseAuthentication();
-            app.UseAuthorization();
-            #region Enable Cors
-            app.UseCors(x => x.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
-            #endregion
             app.UseStaticFiles();
+            app.UseHttpsRedirection();
+            #region Enable Cors
+            app.UseCors("CorsPolicy");
+            app.UseMiddleware<CORMiddleware>();
+            #endregion
+            app.UseRouting();         
+            app.UseAuthorization();                    
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-            UpdateDatabase(app);
+            //UpdateDatabase(app);
         }
-
-        private static void UpdateDatabase(IApplicationBuilder app)
-        {
-            var serviceScope = app.ApplicationServices
-                .GetRequiredService<IServiceScopeFactory>()
-                .CreateScope();
-            var context = serviceScope.ServiceProvider
-                .GetService<ApplicationDbContext>();
-            context.Database.Migrate();
-        }
+        //private static void UpdateDatabase(IApplicationBuilder app)
+        //{
+        //    var serviceScope = app.ApplicationServices
+        //        .GetRequiredService<IServiceScopeFactory>()
+        //        .CreateScope();
+        //    var context = serviceScope.ServiceProvider
+        //        .GetService<ApplicationDbContext>();
+        //    context.Database.Migrate();
+        //}
     }
 }

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using AutoWrapper.Wrappers;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -17,13 +19,16 @@ using WanderLust.Service;
 
 namespace WanderLust.Controllers
 {
+    
     [Route("api/[controller]")]
+    //[EnableCors("CorsPolicy")]
     [ApiController]
     public class ContentController : ControllerBase
     {
         WanderlustDbx db;
         private readonly IOptions<AppSettings> appSettings;
         private readonly ContentService contentService;
+        
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
@@ -40,66 +45,21 @@ namespace WanderLust.Controllers
             roleManager = _roleManager;
             db = new WanderlustDbx(_appSettings);
             webHostEnvironment = _webHostEnvironment;
+            
 
         }
 
-        //[HttpPost]
-        //[Route("AddContent")]
-        //public async Task<ApiResponse> AddContent([FromForm]ContentViewModel contentViewModel)
-        //{
-        //    try
-        //    {
-                
-        //        //content.Home = null;
-        //        #region saveimage
-        //        if()
-        //        var graphics = HttpContext.Request.Form.Files;       
-        //        foreach (var Graphics in graphics)
-        //        {
-        //            if (Graphics != null && Graphics.Length > 0)
-        //            {
-        //                var file = Graphics;
-        //                //There is an error here
-        //                var uploads = webHostEnvironment.WebRootPath + "\\Uploads\\";
-        //                if (file.Length > 0)
-        //                {
-        //                    var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
-        //                    using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
-        //                    {
-        //                        await file.CopyToAsync(fileStream);
-        //                        string filePath = "\\Uploads\\" + fileName;
-        //                        string baseUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
-        //                        contentViewModel.GraphicsURL = fileName;
-        //                    }
-
-        //                }
-        //            }
-        //        }
-        //        #endregion
-        //        var result = await contentService.AddContent(contentViewModel);
-        //        if (result==true)
-        //        {
-        //            return new ApiResponse(CustomResponseMessage.ContentAdded);
-        //        }
-              
-        //        return new ApiResponse(CustomResponseMessage.InternalServerError);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return new ApiResponse(CustomResponseMessage.InternalServerError, StatusCodes.Status500InternalServerError);
-        //    }
-
-        //}
-
-        [HttpPost]
-        [Route("UpdateContent")]
-        public async Task<ApiResponse> UpdateContent([FromForm] Content content)
+        //[EnableCors("CorsPolicy")]
+        [HttpPost, Produces("application/json")]
+        [Route("AddContent")]
+        public async Task<ApiResponse> AddContent([FromForm]ContentViewModel contentViewModel)
         {
-            content.Home = null;
-            int id = content.ContentId;
-            var result = await contentService.FindContentById(id);
-            if (result != null)
+            try
             {
+
+                //content.Home = null;
+                #region saveimage
+
                 var graphics = HttpContext.Request.Form.Files;
                 foreach (var Graphics in graphics)
                 {
@@ -116,16 +76,122 @@ namespace WanderLust.Controllers
                                 await file.CopyToAsync(fileStream);
                                 string filePath = "\\Uploads\\" + fileName;
                                 string baseUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
-                                content.GraphicsURL = fileName;
+                                contentViewModel.GraphicsURL = fileName;
                             }
 
                         }
                     }
                 }
-                await contentService.UpdateContent(content);
+                #endregion
+                var result = await contentService.AddContent(contentViewModel);
+                if (result == true)
+                {
+                    return new ApiResponse(CustomResponseMessage.ContentAdded);
+                }
+
+                return new ApiResponse(CustomResponseMessage.InternalServerError);
             }
-            return new ApiResponse(CustomResponseMessage.ContentUpdated);
+            catch (Exception ex)
+            {
+                return new ApiResponse(CustomResponseMessage.InternalServerError, StatusCodes.Status500InternalServerError);
+            }
+
         }
+
+        
+        [HttpPost, Produces("application/json")]
+        [Route("UpdateContent")]
+        public async Task<ApiResponse> UpdateContent([FromForm] ContentViewModel contentViewModel)
+        {
+           
+            //content.Home = null;
+            //int id = content.ContentId;
+            //var result = await contentService.FindContentById(id);
+            try
+            {
+                //#region saveimage
+
+                //var graphics = HttpContext.Request.Form.Files;
+                //foreach (var Graphics in graphics)
+                //{
+                //    if (Graphics != null && Graphics.Length > 0)
+                //    {
+                //        var file = Graphics;
+                //        //There is an error here
+                //        var uploads = webHostEnvironment.WebRootPath + "\\Uploads\\";
+                //        if (file.Length > 0)
+                //        {
+                //            var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+                //            using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+                //            {
+                //                await file.CopyToAsync(fileStream);
+                //                string filePath = "\\Uploads\\" + fileName;
+                //                string baseUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
+                //                contentViewModel.GraphicsURL = fileName;
+                //            }
+
+                //        }
+                //    }
+                //}
+                //#endregion
+                await contentService.UpdateContent(contentViewModel);
+
+                return new ApiResponse(CustomResponseMessage.ContentUpdated);
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse(CustomResponseMessage.InternalServerError, StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPost, Produces("application/json")]
+        [Route("UploadFile")]
+        public async Task<ApiResponse> UploadFile([FromForm] ImageViewModel imageViewModel)
+        {          
+            try
+            {
+               
+                #region saveimage
+                var graphics = HttpContext.Request.Form.Files;
+                foreach (var Graphics in graphics)
+                {
+                    if (Graphics != null && Graphics.Length > 0)
+                    {
+                        var file = Graphics;
+                        var uploads = webHostEnvironment.WebRootPath + "\\Uploads\\";
+                        //var uploads = Path.Combine(Directory.GetCurrentDirectory(), "~\\Uploads\\");
+                        if (file.Length > 0)
+                        {
+                            var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+                            using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+                            {
+                                await file.CopyToAsync(fileStream);
+                                string filePath = "\\Uploads\\" + fileName;
+                                string baseUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
+                                imageViewModel.GraphicsURL = fileName;
+                            }
+
+                        }
+                    }
+                }
+                #endregion
+
+               var result= await contentService.UploadFile(imageViewModel);
+
+                if (result == true)
+                {
+                    return new ApiResponse(CustomResponseMessage.FileUploaded);
+                }
+
+                return new ApiResponse(CustomResponseMessage.InternalServerError);
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse(CustomResponseMessage.InternalServerError, StatusCodes.Status500InternalServerError);
+            }
+        }
+
+
 
         [HttpGet]
         [Route("GetAllContent")]

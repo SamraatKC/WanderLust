@@ -29,11 +29,8 @@ namespace WanderLust.Data
                 entity.HasOne(p => p.Home)
                 .WithMany(p => p.Content)
                 .HasForeignKey(p=>p.HomeIdFK)
-                .IsRequired(true)
-                .OnDelete(DeleteBehavior.Cascade);
-                
-
-
+                //.IsRequired(true)
+                .OnDelete(DeleteBehavior.Cascade);                
             });
 
             mb.Entity<Home>(entity =>
@@ -43,6 +40,12 @@ namespace WanderLust.Data
                 //entity.HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             });
 
+            mb.Entity<HappyCustomer>(entity =>
+            {
+                entity.HasKey(e => new { e.HappyCustomerId });
+                entity.Property(x => x.HappyCustomerId).ValueGeneratedOnAdd();
+            });
+
 
         }
 
@@ -50,6 +53,7 @@ namespace WanderLust.Data
         public DbSet<AspNetUser> AspNetUsers { get; set; }
         public DbSet<Home> Home { get; set; }
         public DbSet<Content> Content { get; set; }
+        public DbSet<HappyCustomer> HappyCustomer { get; set; }
 
     }
 }
