@@ -41,7 +41,8 @@ msbuild.wrn
 [Vv]16/
 
 #ignore wwwroot/upload
-[Ww]wwroot/[Uu]pload
+[Ww]wwroot/Upload
+[Ww]anderLust/wwwroot/Uploads
 
 #ignore appsettings.json
 [Aa]ppsettings.json
