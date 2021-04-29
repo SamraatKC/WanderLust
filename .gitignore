@@ -42,7 +42,7 @@ msbuild.wrn
 
 #ignore wwwroot/upload
 [Ww]wwroot/[Uu]ploads
-[Ww]wwroot/[Uu]ploads/
+[Ww]wwroot/[Uu]ploads/*.*
 
 #ignore appsettings.json
 [Aa]ppsettings.json
