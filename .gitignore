@@ -40,8 +40,7 @@ msbuild.wrn
 #ignore v16
 [Vv]16/
 
-#ignore wwwroot/upload
-[Ww]wwroot/[Uu]ploads
+
 
 #ignore appsettings.json
 [Aa]ppsettings.json
