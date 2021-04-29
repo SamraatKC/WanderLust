@@ -43,6 +43,7 @@ msbuild.wrn
 #ignore wwwroot/upload
 [Ww]wwroot/[Uu]ploads
 [Ww]wwroot/[Uu]ploads/*.*
+WanderLust/wwwroot/Uploads/
 
 #ignore appsettings.json
 [Aa]ppsettings.json
