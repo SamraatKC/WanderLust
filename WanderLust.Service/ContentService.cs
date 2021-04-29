@@ -62,6 +62,9 @@ namespace WanderLust.Service
                 {
                     if (result.ContentId > 0)
                     {
+                        //Delete Old file
+
+
                         result.GraphicsURL = imageViewModel.GraphicsURL;
                         await db.SaveChangesAsync();
                     }

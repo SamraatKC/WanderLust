@@ -101,7 +101,7 @@ namespace WanderLust.Controllers
         
         [HttpPost, Produces("application/json")]
         [Route("UpdateContent")]
-        public async Task<ApiResponse> UpdateContent([FromForm] ContentViewModel contentViewModel)
+        public async Task<ApiResponse> UpdateContent(ContentViewModel contentViewModel)
         {
            
             //content.Home = null;
@@ -129,7 +129,6 @@ namespace WanderLust.Controllers
                 //                string baseUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
                 //                contentViewModel.GraphicsURL = fileName;
                 //            }
-
                 //        }
                 //    }
                 //}
@@ -143,6 +142,8 @@ namespace WanderLust.Controllers
                 return new ApiResponse(CustomResponseMessage.InternalServerError, StatusCodes.Status500InternalServerError);
             }
         }
+
+
 
         [HttpPost, Produces("application/json")]
         [Route("UploadFile")]
