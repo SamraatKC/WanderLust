@@ -8904,6 +8904,19 @@ svg {
 body {
   font: 16px/1.5"Lato", sans-serif;
 }
+
+.form-control.is-invalid {
+  border-color: #dc3545!important;
+}
+
+.invalid-feedback{
+color:#dc3545;
+}
+
+.info{
+/* border-right:2px solid red!important;*/
+border-left:15px solid #2C97E0!important;
+}
 /* based on angular-toastr css https://github.com/Foxandxss/angular-toastr/blob/cb508fe6801d6b288d3afc525bb40fee1b101650/dist/angular-toastr.css */
 
 /* position */

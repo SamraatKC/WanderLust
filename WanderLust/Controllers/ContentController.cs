@@ -36,10 +36,11 @@ namespace WanderLust.Controllers
         public ContentController(IWebHostEnvironment _webHostEnvironment, IOptions<AppSettings> _appSettings,
             UserManager<ApplicationUser> _userManager,
             SignInManager<ApplicationUser> _signInManager,
-            RoleManager<IdentityRole> _roleManager)
+            RoleManager<IdentityRole> _roleManager,
+            ContentService _contentService)
         {
             appSettings = _appSettings;
-            contentService = new ContentService(_appSettings);
+            contentService = _contentService;
             userManager = _userManager;
             signInManager = _signInManager;
             roleManager = _roleManager;
@@ -52,7 +53,7 @@ namespace WanderLust.Controllers
         //[EnableCors("CorsPolicy")]
         [HttpPost, Produces("application/json")]
         [Route("AddContent")]
-        public async Task<ApiResponse> AddContent([FromForm]ContentViewModel contentViewModel)
+        public async Task<ApiResponse> AddContent(ContentViewModel contentViewModel)
         {
             try
             {
@@ -97,45 +98,18 @@ namespace WanderLust.Controllers
             }
 
         }
-
         
         [HttpPost, Produces("application/json")]
         [Route("UpdateContent")]
         public async Task<ApiResponse> UpdateContent(ContentViewModel contentViewModel)
         {
-           
-            //content.Home = null;
-            //int id = content.ContentId;
-            //var result = await contentService.FindContentById(id);
             try
             {
-                //#region saveimage
-
-                //var graphics = HttpContext.Request.Form.Files;
-                //foreach (var Graphics in graphics)
-                //{
-                //    if (Graphics != null && Graphics.Length > 0)
-                //    {
-                //        var file = Graphics;
-                //        //There is an error here
-                //        var uploads = webHostEnvironment.WebRootPath + "\\Uploads\\";
-                //        if (file.Length > 0)
-                //        {
-                //            var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
-                //            using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
-                //            {
-                //                await file.CopyToAsync(fileStream);
-                //                string filePath = "\\Uploads\\" + fileName;
-                //                string baseUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
-                //                contentViewModel.GraphicsURL = fileName;
-                //            }
-                //        }
-                //    }
-                //}
-                //#endregion
-                await contentService.UpdateContent(contentViewModel);
-
-                return new ApiResponse(CustomResponseMessage.ContentUpdated);
+                var response = await contentService.UpdateContent(contentViewModel);
+                if (response.ContentId > 0)
+                    return new ApiResponse(CustomResponseMessage.ContentUpdated);
+                else
+                    return new ApiResponse(StatusCodes.Status204NoContent, CustomResponseMessage.ContentUpdateFailed);
             }
             catch (Exception ex)
             {
@@ -143,6 +117,23 @@ namespace WanderLust.Controllers
             }
         }
 
+        [HttpPost, Produces("application/json")]
+        [Route("SaveOrUpdateContent")]
+        public async Task<ApiResponse>SaveOrUpdateContent([FromForm]ContentViewModel contentViewModel)
+        {
+            try
+            {
+                var response = await contentService.SaveOrUpdateContent(contentViewModel);
+                if (response.ContentId > 0)
+                    return new ApiResponse(response, StatusCodes.Status200OK);
+                else
+                    return new ApiResponse(StatusCodes.Status204NoContent, CustomResponseMessage.ContentUpdateFailed);
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse(CustomResponseMessage.InternalServerError, StatusCodes.Status500InternalServerError);
+            }
+        }
 
 
         [HttpPost, Produces("application/json")]
@@ -192,11 +183,9 @@ namespace WanderLust.Controllers
             }
         }
 
-
-
         [HttpGet]
         [Route("GetAllContent")]
-        public async Task<List<Content>> GetAllContent()
+        public async Task<List<ContentViewModel>> GetAllContent()
         {
             try
             {
@@ -230,15 +219,18 @@ namespace WanderLust.Controllers
         }
 
         [HttpPost]
-        [Route("DeleteContentById")]
+        [Route("DeleteContentById/{id:int}")]
         public async Task<ApiResponse> DeleteContentById(int id)
         {
             try
             {
-                bool checkDependency = contentService.CheckContentDependencies(id);
-                if (checkDependency == true)
+                int contentId = int.Parse(id.ToString());
+                //for now only dependency check is check as there are improper logic in the method.
+                //bool checkDependency = contentService.CheckContentDependencies(contentId);
+                bool checkDependency = false;
+                if (!checkDependency)
                 {
-                    var result = await contentService.DeleteContentById(id);
+                    var result = await contentService.DeleteContentById(contentId);
 
                     if (result)
                     {

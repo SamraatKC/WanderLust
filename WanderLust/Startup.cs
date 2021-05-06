@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -120,7 +122,9 @@ namespace WanderLust
                 });
 
             #endregion
-                                            
+
+
+            services.AddScoped<Service.ContentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -130,6 +134,20 @@ namespace WanderLust
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            //Redirect non api calls to angular app that will handle routing of the app.    
+            app.Use(async (context, next) =>
+            {
+                await next();
+                if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
+                {
+                    context.Request.Path = "/index.html";
+                    context.Response.StatusCode = 200;
+                    await next();
+                }
+                await next();
+            });
+
             #region use swagger ui, to test the api endpoints
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -139,6 +157,7 @@ namespace WanderLust
             #endregion
             app.UseAuthentication();
             app.UseStaticFiles();
+
             app.UseHttpsRedirection();
             #region Enable Cors
             app.UseCors("CorsPolicy");

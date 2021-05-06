@@ -1,10 +1,12 @@
 ﻿using AutoWrapper.Wrappers;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,10 +21,13 @@ namespace WanderLust.Service
     {
         WanderlustDbx db;
         IOptions<AppSettings> appSettings;
-        public ContentService(IOptions<AppSettings> _appSettings)
+        private IWebHostEnvironment webHostEnvironment;
+
+        public ContentService(IOptions<AppSettings> _appSettings, IWebHostEnvironment _webHostEnvironment)
         {
             appSettings = _appSettings;
             db = new WanderlustDbx(_appSettings);
+            webHostEnvironment = _webHostEnvironment;
         }
 
         public async Task<bool> AddContent(ContentViewModel contentViewModel)
@@ -93,29 +98,91 @@ namespace WanderLust.Service
         }
 
 
-        public async Task<Content> UpdateContent(ContentViewModel contentViewModel)
-        {
-            Content content = new Content();
-            int id=content.ContentId;
-            var result = await db.Content.FirstOrDefaultAsync(e => e.ContentId == id);
-            if (result != null)
+        public async Task<ContentViewModel> UpdateContent(ContentViewModel contentViewModel)
+        {           
+            if (contentViewModel.ContentId > 0)
             {
+                var result = await db.Content.FirstOrDefaultAsync(e => e.ContentId == contentViewModel.ContentId);
                 result.Title = contentViewModel.Title;
                 result.SubTitle = contentViewModel.SubTitle;
                 result.Description = contentViewModel.Description;
-                result.HomeIdFK = contentViewModel.HomeIdFK;
-                result.GraphicsURL = contentViewModel.GraphicsURL;
-                //result.SubsectionName = contentViewModel.SubsectionName;
-                //result.ContentType = contentViewModel.ContentType;
-                await db.SaveChangesAsync();
-                return result;
+                if(await db.SaveChangesAsync() > 0)
+                    return contentViewModel;
+                else
+                {
+                    //-1 meaning not able to update the record.
+                    contentViewModel.ContentId = -1;
+                    return contentViewModel;
+                }
             }
-            return null;
+            else
+            {
+                Content content = new Content();
+                content = (Content)contentViewModel;
+                db.Content.Add(content);
+                await db.SaveChangesAsync();
+                return (ContentViewModel)content;
+            }
         }
 
-        public async Task<List<Content>> GetAllContent()
+        public async Task<ContentViewModel> SaveOrUpdateContent([FromForm]ContentViewModel contentViewModel)
         {
-            return await db.Content.ToListAsync();
+            if (contentViewModel.ContentId > 0)
+            {
+                var result = await db.Content.FirstOrDefaultAsync(e => e.ContentId == contentViewModel.ContentId);
+                result.Title = contentViewModel.Title;
+                result.SubTitle = contentViewModel.SubTitle;
+                result.Description = contentViewModel.Description;
+
+                if (result.GraphicsURL != contentViewModel.GraphicsURL)
+                {
+                    // Saving Image on Server
+                    if (contentViewModel.Graphics.Length > 0)
+                    {
+                        var uploads = webHostEnvironment.WebRootPath + appSettings.Value.UploadPath;
+                        var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(contentViewModel.Graphics.FileName);
+                        using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+                        {
+                            await contentViewModel.Graphics.CopyToAsync(fileStream);
+                            result.GraphicsURL = fileName;
+                            contentViewModel.GraphicsURL = fileName;
+                        }
+                    }
+                }
+
+                if (await db.SaveChangesAsync() > 0)
+                    return contentViewModel;
+                else
+                {
+                    //-1 meaning not able to update the record.
+                    contentViewModel.ContentId = -1;
+                    return contentViewModel;
+                }
+            }
+            else
+            {
+                Content content = new Content();
+                content = (Content)contentViewModel;
+                if (contentViewModel.Graphics.Length > 0)
+                {
+                    var uploads = webHostEnvironment.WebRootPath + appSettings.Value.UploadPath;
+                    var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(contentViewModel.Graphics.FileName);
+                    using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.OpenOrCreate))
+                    {
+                        await contentViewModel.Graphics.CopyToAsync(fileStream);
+                        content.GraphicsURL = fileName;
+                    }
+                }
+                db.Content.Add(content);
+                await db.SaveChangesAsync();
+                return (ContentViewModel)content;
+            }
+        }
+
+
+        public async Task<List<ContentViewModel>> GetAllContent()
+        {
+            return await db.Content.Select(x=> (ContentViewModel)x).ToListAsync();
         }
 
 
@@ -136,7 +203,9 @@ namespace WanderLust.Service
 
         public bool CheckContentDependencies(int id)
         {
+            //when checking dependency to owns table must avoid checking self record.
             var count = db.Content.Count(u => u.ContentId == id);
+            //what the **** is going on here, if count is equal to zero, it is not dependent but if count value is greater than zero then this record is dependent to other.
             if (count == 0)
             {
                 return true;

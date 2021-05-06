@@ -24,6 +24,7 @@ namespace WanderLust.Models.CommonModels
         public static string ContentAdded { get { return "Content successfully added"; } }
         public static string FileUploaded { get { return "File successfully Uploaded"; } }
         public static string ContentUpdated { get { return "Content successfully updated"; } }
+        public static string ContentUpdateFailed { get { return "Content update failed"; } }
         public static string ContentDeleted { get { return "Content successfully deleted"; } }
         public static string ContentDeletionError { get { return "The data you are trying to delete has dependency with other table."; } }
         public static string HappyCustomerAdded { get { return "HappyCustomer successfully added"; } }

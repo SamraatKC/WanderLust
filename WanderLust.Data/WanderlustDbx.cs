@@ -26,6 +26,7 @@ namespace WanderLust.Data
             {
                 entity.HasKey(e => new { e.ContentId });
                 entity.Property(x => x.ContentId).ValueGeneratedOnAdd();
+               
                 entity.HasOne(p => p.Home)
                 .WithMany(p => p.Content)
                 .HasForeignKey(p=>p.HomeIdFK)
