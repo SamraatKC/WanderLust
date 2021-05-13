@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WanderLust.Common;
 using WanderLust.Data;
 using WanderLust.Models.CommonModels;
 using WanderLust.Models.DataModels;
@@ -23,10 +24,10 @@ namespace WanderLust.Service
         IOptions<AppSettings> appSettings;
         private IWebHostEnvironment webHostEnvironment;
 
-        public ContentService(IOptions<AppSettings> _appSettings, IWebHostEnvironment _webHostEnvironment)
+        public ContentService(IOptions<AppSettings> _appSettings, IWebHostEnvironment _webHostEnvironment, WanderlustDbx _db)
         {
             appSettings = _appSettings;
-            db = new WanderlustDbx(_appSettings);
+            db = _db;
             webHostEnvironment = _webHostEnvironment;
         }
 
@@ -40,7 +41,7 @@ namespace WanderLust.Service
                 Description = contentViewModel.Description,
                 HomeIdFK = contentViewModel.HomeIdFK,
                 GraphicsURL = contentViewModel.GraphicsURL,
-                //SubsectionName = contentViewModel.SubsectionName,
+                SubSectionName = contentViewModel.SubSectionName,
                 //ContentType= contentViewModel.ContentType
             };
             if (result.ContentId >= 0)
@@ -106,6 +107,9 @@ namespace WanderLust.Service
                 result.Title = contentViewModel.Title;
                 result.SubTitle = contentViewModel.SubTitle;
                 result.Description = contentViewModel.Description;
+                result.SubSectionName = contentViewModel.SubSectionName;
+                result.ContentType = contentViewModel.ContentType;
+                
                 if(await db.SaveChangesAsync() > 0)
                     return contentViewModel;
                 else
@@ -133,19 +137,33 @@ namespace WanderLust.Service
                 result.Title = contentViewModel.Title;
                 result.SubTitle = contentViewModel.SubTitle;
                 result.Description = contentViewModel.Description;
+                result.SubSectionName = contentViewModel.SubSectionName;
+                result.ContentType = contentViewModel.ContentType;
 
+                //remove previously marked hot package and set it current as a hot package if marked it as hot package
+                if(contentViewModel.ContentType == Enums.EnumContentType.HotPackage.ToString())
+                {
+                    var allHotPackages = db.Content.Where(x => x.ContentType ==  Enums.EnumContentType.HotPackage.ToString());
+                    foreach(var package in allHotPackages)
+                    {
+                        package.ContentType = Enums.EnumContentType.RegularPackage.ToString();
+                    }
+                }
                 if (result.GraphicsURL != contentViewModel.GraphicsURL)
                 {
-                    // Saving Image on Server
-                    if (contentViewModel.Graphics.Length > 0)
+                    // Saving Image on Server if exists
+                    if (contentViewModel.Graphics != null)
                     {
-                        var uploads = webHostEnvironment.WebRootPath + appSettings.Value.UploadPath;
-                        var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(contentViewModel.Graphics.FileName);
-                        using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+                        if (contentViewModel.Graphics.Length > 0)
                         {
-                            await contentViewModel.Graphics.CopyToAsync(fileStream);
-                            result.GraphicsURL = fileName;
-                            contentViewModel.GraphicsURL = fileName;
+                            var uploads = webHostEnvironment.WebRootPath + appSettings.Value.UploadPath;
+                            var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(contentViewModel.Graphics.FileName);
+                            using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+                            {
+                                await contentViewModel.Graphics.CopyToAsync(fileStream);
+                                result.GraphicsURL = fileName;
+                                contentViewModel.GraphicsURL = fileName;
+                            }
                         }
                     }
                 }
@@ -163,14 +181,26 @@ namespace WanderLust.Service
             {
                 Content content = new Content();
                 content = (Content)contentViewModel;
-                if (contentViewModel.Graphics.Length > 0)
+                if (contentViewModel.Graphics != null)
                 {
-                    var uploads = webHostEnvironment.WebRootPath + appSettings.Value.UploadPath;
-                    var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(contentViewModel.Graphics.FileName);
-                    using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.OpenOrCreate))
+                    if (contentViewModel.Graphics.Length > 0)
                     {
-                        await contentViewModel.Graphics.CopyToAsync(fileStream);
-                        content.GraphicsURL = fileName;
+                        var uploads = webHostEnvironment.WebRootPath + appSettings.Value.UploadPath;
+                        var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(contentViewModel.Graphics.FileName);
+                        using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.OpenOrCreate))
+                        {
+                            await contentViewModel.Graphics.CopyToAsync(fileStream);
+                            content.GraphicsURL = fileName;
+                        }
+                    }
+                }
+                //remove previously marked hot package and set it current as a hot package if marked it as hot package
+                if (contentViewModel.ContentType == Enums.EnumContentType.HotPackage.ToString())
+                {
+                    var allHotPackages = db.Content.Where(x => x.ContentType == Enums.EnumContentType.HotPackage.ToString());
+                    foreach (var package in allHotPackages)
+                    {
+                        package.ContentType = Enums.EnumContentType.RegularPackage.ToString();
                     }
                 }
                 db.Content.Add(content);

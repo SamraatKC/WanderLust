@@ -14,16 +14,19 @@ namespace WanderLust.Models.ViewModels
         public string SubTitle { get; set; }
         public string Description { get; set; }
         public int? HomeIdFK { get; set; }
+        public string SubSectionName { get; set; }
         public IFormFile Graphics { get; set; }
         public string GraphicsURL { get; set; }
+        public string ContentType { get; set; }
 
         public static implicit operator ContentViewModel(Content content)
         {
             ContentViewModel contentVM = new ContentViewModel();
             contentVM.ContentId = content.ContentId;
             contentVM.HomeIdFK = content.HomeIdFK;
+            contentVM.SubSectionName = content.SubSectionName;
+            contentVM.ContentType = content.ContentType;
             contentVM.Description = content.Description;
-            contentVM.Graphics = content.Graphics;
             contentVM.Title = content.Title;
             contentVM.SubTitle = content.SubTitle;
             contentVM.GraphicsURL = content.GraphicsURL;

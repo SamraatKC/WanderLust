@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WanderLust.Common\WanderLust.Common.csproj" />
     <ProjectReference Include="..\WanderLust.Data\WanderLust.Data.csproj" />
     <ProjectReference Include="..\WanderLust.Models\WanderLust.Models.csproj" />
   </ItemGroup>

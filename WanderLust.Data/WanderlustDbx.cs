@@ -25,7 +25,7 @@ namespace WanderLust.Data
             mb.Entity<Content>(entity =>
             {
                 entity.HasKey(e => new { e.ContentId });
-                entity.Property(x => x.ContentId).ValueGeneratedOnAdd();
+                
                
                 entity.HasOne(p => p.Home)
                 .WithMany(p => p.Content)
@@ -47,6 +47,11 @@ namespace WanderLust.Data
                 entity.Property(x => x.HappyCustomerId).ValueGeneratedOnAdd();
             });
 
+            mb.Entity<ContactUs>(e => {
+                e.HasKey(k => k.Id);
+                e.Property(x => x.Id).ValueGeneratedOnAdd();
+            });
+
 
         }
 
@@ -55,6 +60,8 @@ namespace WanderLust.Data
         public DbSet<Home> Home { get; set; }
         public DbSet<Content> Content { get; set; }
         public DbSet<HappyCustomer> HappyCustomer { get; set; }
+
+        public DbSet<ContactUs> ContactUs { get; set; }
 
     }
 }

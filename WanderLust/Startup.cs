@@ -20,6 +20,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using WanderLust.Data;
 using WanderLust.MiddleWare;
 using WanderLust.Models.CommonModels;
 using WanderLust.Models.DataModels;
@@ -125,6 +126,8 @@ namespace WanderLust
 
 
             services.AddScoped<Service.ContentService>();
+            services.AddScoped<Service.ContactUsService>();
+            services.AddScoped<WanderlustDbx>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
