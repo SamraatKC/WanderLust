@@ -8879,13 +8879,29 @@ button {
   cursor: pointer;
 }
 
-input {
+/* input {
   -webkit-appearance: none;
-}
+} */
 
-[type="checkbox"] {
+/* [type="checkbox"] {
   position: absolute;
   left: -9999px;
+} */
+
+input[type=checkbox]{
+width: 2em!important;
+height: 2em!important;
+border-radius: 5px;
+display: inline;
+}
+
+input[type=checkbox] + label{
+  font-size: 1.2em;
+  padding-left: 0.5em;
+  font-weight: normal;
+  vertical-align: 0.3em;
+  -webkit-user-select: none;
+          user-select: none;
 }
 
 label {
@@ -8917,6 +8933,103 @@ color:#dc3545;
 /* border-right:2px solid red!important;*/
 border-left:15px solid #2C97E0!important;
 }
+
+/*************************** ADMIN ACCORDION CSS ***************************/
+
+/*.page-content .grid {*/
+
+.grid {
+    display: grid;
+    grid-template-columns: 1;
+    grid-gap: 30px;
+}
+
+/*.page-content .grid > article {*/
+
+/* .grid > article {
+        display: flex;
+        height: 300px;
+        background: var(--page-content-blockColor);
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+    } */
+
+.accordionMenu {
+    margin: 0;
+    padding: 0;
+}
+
+.accordionMenu input[type="radio"] {
+    display: none;
+}
+
+.accordionMenu_label {
+    display: block;
+    height: 50px;
+    line-height: 47px;
+    padding: 0 25px 0 10px;
+    font-size: 18px;
+    position: relative;
+    cursor: pointer;
+    border-bottom: 1px solid #e6e6e6;
+    color: var(--page-header-txtColor);
+    background: var(--page-header-bgColor);
+}
+
+.accordionMenu_label:hover {
+    background: var(--page-header-bgColor-hover);
+    color: var(--blue);    
+}
+
+.accordionMenu_label.active{
+    color:var(--blue);
+    text-transform: uppercase;
+    text-decoration: underline;
+
+}
+
+.accordionMenu_label::after {
+    display: block;
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 0 5px 10px;
+    border-color: transparent transparent transparent #ffffff;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    z-index: 10;
+    transition: all 0.3s ease-in-out;
+}
+
+.accordionMenu .content {
+    max-height: 0;
+    height: 0;
+    overflow: hidden;
+    transition: all 2s ease-in-out;
+}
+
+.accordionMenu .content .inner {
+    font-size: 1.2rem;
+    /*color: #2c97de;*/
+    line-height: 1.5;
+    background: white;
+    padding: 20px 10px;
+    border-radius: 5px;
+}
+
+.accordionMenu input[type="radio"]:checked + label:after {
+    transform: rotate(90deg);
+}
+
+.accordionMenu input[type="radio"]:checked + label + .content {
+    max-height: 2000px;
+    height: auto;
+}
+
+/***************************************************************************/
+
 /* based on angular-toastr css https://github.com/Foxandxss/angular-toastr/blob/cb508fe6801d6b288d3afc525bb40fee1b101650/dist/angular-toastr.css */
 
 /* position */

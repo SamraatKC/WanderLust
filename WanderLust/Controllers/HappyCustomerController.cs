@@ -26,17 +26,11 @@ namespace WanderLust.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;       
-        public HappyCustomerController(IOptions<AppSettings> _appSettings,
-            UserManager<ApplicationUser> _userManager,
-            SignInManager<ApplicationUser> _signInManager,
-            RoleManager<IdentityRole> _roleManager)
+        public HappyCustomerController(IOptions<AppSettings> _appSettings, HappyCustomerService _happyCustomerService, WanderlustDbx _db)
         {
             appSettings = _appSettings;
-            happyCustomerService = new HappyCustomerService(_appSettings);
-            userManager = _userManager;
-            signInManager = _signInManager;
-            roleManager = _roleManager;
-            db = new WanderlustDbx(_appSettings);
+            happyCustomerService = _happyCustomerService;
+            db = _db;
         }
 
         [HttpPost]

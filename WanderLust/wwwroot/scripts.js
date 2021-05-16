@@ -27376,8 +27376,12 @@ $(document).ready(function() {
 //message: Issue occured on ui animation initilization on pages like home, aboutus ...etc. so script $(function(){})); need modification. 
 //To To fix the issue $(function(){}) is omited and initCustomScriptForAngular = function(){...}; is introduced, after introduction initCustomScriptForAngular = function(){...} which is invoked from ngOnInit() from pages like home, about as, all the ui animation related issues has been fixed. 
 
-var initCustomScriptForAngular = function() {};
+//var initCustomScriptForAngular = function() {};
 $(function() {
+  init_custom_script();
+});
+
+  var init_custom_script = function(){
     /*----------------------------------------------------*/
     /* MOBILE DETECT FUNCTION
     /*----------------------------------------------------*/
@@ -27838,15 +27842,8 @@ $(function() {
         $container.isotope('layout');
       }
     }
-  
-});
-  //}); //
-  $(window).on("load", function() {
-      //
-  
-  
-  
-  }); //
+  }
+
 
   
 ;/*!

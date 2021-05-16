@@ -11,6 +11,7 @@ namespace WanderLust.Models.DataModels
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int HappyCustomerId { get; set; }
+        public string RatingBy { get; set; }
         public string Title { get; set; }
         public string SubTitle { get; set; }
         public string Description { get; set; }
@@ -18,6 +19,7 @@ namespace WanderLust.Models.DataModels
         public int Hotels { get; set; }
         public int Cars { get; set; }
         public int Cruises { get; set; }
+        public AspNetUser AspNetUser { get; set; }
 
     }
 }
