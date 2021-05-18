@@ -125,9 +125,14 @@ namespace WanderLust
             #endregion
 
 
+            #region injection
+
+            services.AddScoped<WanderlustDbx>();
             services.AddScoped<Service.ContentService>();
             services.AddScoped<Service.ContactUsService>();
-            services.AddScoped<WanderlustDbx>();
+            services.AddScoped<Service.HappyCustomerService>();
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

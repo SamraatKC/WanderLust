@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WanderLust.Data;
@@ -35,6 +37,30 @@ namespace WanderLust.Service
             await db.HappyCustomer.AddAsync(happyCustomer);
             await db.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<bool> UpdateHappyCustomer(HappyCustomerViewModel happyCustomerViewModel)
+        {
+            HappyCustomer happyCustomer = await db.HappyCustomer.FindAsync(happyCustomerViewModel.HappyCustomerId);
+            if(happyCustomer != null)
+            {
+                happyCustomer.Title = happyCustomerViewModel.Title;
+                happyCustomer.SubTitle = happyCustomerViewModel.SubTitle;
+                happyCustomer.Description = happyCustomerViewModel.Description;
+                happyCustomer.Flights = happyCustomerViewModel.Flights;
+                happyCustomer.Hotels = happyCustomerViewModel.Hotels;
+                happyCustomer.Cars = happyCustomerViewModel.Hotels;
+                happyCustomer.Cruises = happyCustomerViewModel.Cruises;
+                await db.SaveChangesAsync();
+                return true;
+            };
+            return false ;
+        }
+
+        public async Task<List<HappyCustomerViewModel>> GetHappyCustomer()
+        {
+            List<HappyCustomerViewModel> vlm = await db.HappyCustomer.Select(x => (HappyCustomerViewModel)x).ToListAsync();
+            return vlm;
         }
     }
 }

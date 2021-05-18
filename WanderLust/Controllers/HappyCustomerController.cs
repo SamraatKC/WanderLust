@@ -16,7 +16,7 @@ using WanderLust.Service;
 namespace WanderLust.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController] 
     public class HappyCustomerController : ControllerBase
     {
         WanderlustDbx db;
@@ -25,7 +25,7 @@ namespace WanderLust.Controllers
 
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-        private readonly RoleManager<IdentityRole> roleManager;       
+        private readonly RoleManager<IdentityRole> roleManager;
         public HappyCustomerController(IOptions<AppSettings> _appSettings, HappyCustomerService _happyCustomerService, WanderlustDbx _db)
         {
             appSettings = _appSettings;
@@ -34,13 +34,13 @@ namespace WanderLust.Controllers
         }
 
         [HttpPost]
-        [Route("AddHappyCustomer")]
-        public async Task<ApiResponse>AddHappyCustomer(HappyCustomerViewModel happyCustomerViewModel)
+        [Route("SaveHappyCustomer")]
+        public async Task<ApiResponse> SaveHappyCustomer(HappyCustomerViewModel happyCustomerViewModel)
         {
-         try
+            try
             {
                 var result = await happyCustomerService.AddHappyCustomer(happyCustomerViewModel);
-                if(result==true)
+                if (result == true)
                 {
                     return new ApiResponse(CustomResponseMessage.HappyCustomerAdded);
                 }
@@ -49,9 +49,49 @@ namespace WanderLust.Controllers
                     return new ApiResponse(CustomResponseMessage.InternalServerError);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new ApiResponse(CustomResponseMessage.InternalServerError, StatusCodes.Status500InternalServerError);
+            }
+
+        }
+
+        [HttpPost]
+        [Route("UpdateHappyCustomer")]
+        public async Task<ApiResponse> UpdateHappyCustomer(HappyCustomerViewModel happyCustomerViewModel)
+        {
+            try
+            {
+                var result = await happyCustomerService.UpdateHappyCustomer(happyCustomerViewModel);
+                if (result == true)
+                {
+                    return new ApiResponse(CustomResponseMessage.HappyCustomerAdded);
+                }
+                else
+                {
+                    return new ApiResponse(CustomResponseMessage.InternalServerError);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse(CustomResponseMessage.InternalServerError, StatusCodes.Status500InternalServerError);
+            }
+
+        }
+
+        [HttpGet]
+        [Route("GetHappyCustomerInfo")]
+        public async Task<ApiResponse> GetHappyCustomerInfo()
+        {
+            try
+            {
+                var result = await happyCustomerService.GetHappyCustomer();
+                return new ApiResponse(result, StatusCodes.Status200OK);
+
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse(ex.Message, StatusCodes.Status500InternalServerError);
             }
 
         }

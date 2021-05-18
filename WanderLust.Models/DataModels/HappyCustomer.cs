@@ -19,7 +19,7 @@ namespace WanderLust.Models.DataModels
         public int Hotels { get; set; }
         public int Cars { get; set; }
         public int Cruises { get; set; }
-        public AspNetUser AspNetUser { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
 
     }
 }

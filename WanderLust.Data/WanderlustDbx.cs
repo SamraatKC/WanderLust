@@ -22,11 +22,13 @@ namespace WanderLust.Data
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
+            mb.Entity<AspNetUser>(entity => {
+                entity.HasKey(e => e.Id);
+            });
+
             mb.Entity<Content>(entity =>
             {
-                entity.HasKey(e => new { e.ContentId });
-                
-               
+                entity.HasKey(e => new { e.ContentId });              
                 entity.HasOne(p => p.Home)
                 .WithMany(p => p.Content)
                 .HasForeignKey(p=>p.HomeIdFK)
@@ -45,14 +47,15 @@ namespace WanderLust.Data
             {
                 entity.HasKey(e => new { e.HappyCustomerId });
                 entity.Property(x => x.HappyCustomerId).ValueGeneratedOnAdd();
+                entity.HasOne(x => x.AspNetUser)
+                .WithMany()
+                .HasForeignKey(x => x.RatingBy);
             });
 
             mb.Entity<ContactUs>(e => {
                 e.HasKey(k => k.Id);
                 e.Property(x => x.Id).ValueGeneratedOnAdd();
             });
-
-
         }
 
 
