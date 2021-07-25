@@ -13,5 +13,11 @@ namespace WanderLust.Common
             IntroPackage = 3
         }
 
+        public enum RoleNames
+        {
+            Admin,
+            Customer
+        }
+
     }
 }

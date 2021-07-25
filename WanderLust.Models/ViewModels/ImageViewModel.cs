@@ -10,5 +10,6 @@ namespace WanderLust.Models.ViewModels
       
         public IFormFile Graphics { get; set; }
         public string GraphicsURL { get; set; }
+        public int CategoryId { get; set; }
     }
 }

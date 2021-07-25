@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,7 @@ using WanderLust.Data;
 using WanderLust.MiddleWare;
 using WanderLust.Models.CommonModels;
 using WanderLust.Models.DataModels;
+using WanderLust.Common;
 
 namespace WanderLust
 {
@@ -38,19 +40,23 @@ namespace WanderLust
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {           
+        {
+            var config = Configuration.GetSection("AppSettings").Get<AppSettings>();
             services.Configure<AppSettings>(Configuration.GetSection("ConnectionStrings"));
             services.Configure<AppSettings>(Configuration.GetSection("appSettings"));
             #region CorsPolicy
+
+            Debug.WriteLine("AllowedOrigin: " + config.AllowedOrigin);
             services.AddCors(options =>
             {
                 options.AddPolicy(
                   "CorsPolicy",
-                  builder => builder.WithOrigins("http://localhost:4200")
+                  builder => builder.WithOrigins(config.AllowedOrigin)
                   .AllowAnyMethod()
                   .AllowAnyHeader()
                   .AllowCredentials());
             });
+            
             services.AddAuthentication(IISDefaults.AuthenticationScheme);
             #endregion
             services.AddControllers(x => x.AllowEmptyInputInBodyModelBinding = true)
@@ -97,6 +103,8 @@ namespace WanderLust
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 1;
                 options.Password.RequireNonAlphanumeric = false;
+                options.SignIn.RequireConfirmedEmail = true;
+                
             });
 
             #endregion
@@ -131,7 +139,10 @@ namespace WanderLust
             services.AddScoped<Service.ContentService>();
             services.AddScoped<Service.ContactUsService>();
             services.AddScoped<Service.HappyCustomerService>();
-
+            services.AddScoped<Service.GalleryService>();
+            services.AddScoped<Service.CategoryService>();
+            services.AddScoped<EmailHelper>();
+            services.AddServiceExtension();
             #endregion
         }
 

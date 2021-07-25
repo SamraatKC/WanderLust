@@ -12,10 +12,10 @@ namespace WanderLust.Models.ViewModels
         public string Title { get; set; }
         public string SubTitle { get; set; }
         public string Description { get; set; }
-        public int Flights { get; set; }
-        public int Hotels { get; set; }
-        public int Cars { get; set; }
-        public int Cruises { get; set; }
+        public byte Flights { get; set; }
+        public byte Hotels { get; set; }
+        public byte Cars { get; set; }
+        public byte Cruises { get; set; }
         public UserViewModel RatingUser { get; set; }
 
         public static implicit operator HappyCustomerViewModel(HappyCustomer model)
@@ -30,7 +30,7 @@ namespace WanderLust.Models.ViewModels
             vm.Hotels = model.Hotels;
             vm.Cars = model.Cars;
             vm.Cruises = model.Cruises;
-            vm.RatingUser = new UserViewModel()
+            vm.RatingUser = model.AspNetUser == null ? null :  new UserViewModel()
             {
                 Email = model.AspNetUser.Email,
                 FirstName = model.AspNetUser.FirstName,

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using WanderLust.Common;
 using WanderLust.Data;
 using WanderLust.Models.CommonModels;
 using WanderLust.Models.DataModels;
@@ -46,8 +47,6 @@ namespace WanderLust.Controllers
             roleManager = _roleManager;
             db = new WanderlustDbx(_appSettings);
             webHostEnvironment = _webHostEnvironment;
-            
-
         }
 
         //[EnableCors("CorsPolicy")]
@@ -57,7 +56,6 @@ namespace WanderLust.Controllers
         {
             try
             {
-
                 //content.Home = null;
                 #region saveimage
 
@@ -68,18 +66,17 @@ namespace WanderLust.Controllers
                     {
                         var file = Graphics;
                         //There is an error here
-                        var uploads = webHostEnvironment.WebRootPath + "\\Uploads\\";
+                        var uploads = webHostEnvironment.WebRootPath + appSettings.Value.UploadImagePath;
                         if (file.Length > 0)
                         {
                             var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
                             using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
                             {
                                 await file.CopyToAsync(fileStream);
-                                string filePath = "\\Uploads\\" + fileName;
+                                string filePath = appSettings.Value.UploadImagePath + fileName;
                                 string baseUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
                                 contentViewModel.GraphicsURL = fileName;
                             }
-
                         }
                     }
                 }
@@ -150,7 +147,7 @@ namespace WanderLust.Controllers
                     if (Graphics != null && Graphics.Length > 0)
                     {
                         var file = Graphics;
-                        var uploads = webHostEnvironment.WebRootPath + "\\Uploads\\";
+                        var uploads = webHostEnvironment.WebRootPath + appSettings.Value.UploadImagePath;
                         //var uploads = Path.Combine(Directory.GetCurrentDirectory(), "~\\Uploads\\");
                         if (file.Length > 0)
                         {
@@ -158,11 +155,10 @@ namespace WanderLust.Controllers
                             using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
                             {
                                 await file.CopyToAsync(fileStream);
-                                string filePath = "\\Uploads\\" + fileName;
+                                string filePath = appSettings.Value.UploadImagePath + fileName;
                                 string baseUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
                                 imageViewModel.GraphicsURL = fileName;
                             }
-
                         }
                     }
                 }
@@ -172,28 +168,28 @@ namespace WanderLust.Controllers
 
                 if (result == true)
                 {
-                    return new ApiResponse(CustomResponseMessage.FileUploaded);
+                    return new ApiResponse(new { CustomResponseMessage.FileUploaded }, StatusCodes.Status200OK);
                 }
 
-                return new ApiResponse(CustomResponseMessage.InternalServerError);
+                return new ApiResponse(new { CustomResponseMessage.InternalServerError }, StatusCodes.Status500InternalServerError);
             }
             catch (Exception ex)
             {
-                return new ApiResponse(CustomResponseMessage.InternalServerError, StatusCodes.Status500InternalServerError);
+                return new ApiResponse(ex.Message, StatusCodes.Status500InternalServerError);
             }
         }
 
         [HttpGet]
         [Route("GetAllContent")]
-        public async Task<List<ContentViewModel>> GetAllContent()
+        public async Task<ApiResponse> GetAllContent()
         {
             try
             {
-                return await contentService.GetAllContent();
+                return new ApiResponse(await contentService.GetAllContent(), StatusCodes.Status200OK);
             }
             catch (Exception ex)
             {
-                throw ex;
+                return new ApiResponse(StatusCodes.Status500InternalServerError, ex);
             }
         }
 

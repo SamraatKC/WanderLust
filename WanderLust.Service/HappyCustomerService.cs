@@ -9,6 +9,7 @@ using WanderLust.Data;
 using WanderLust.Models.CommonModels;
 using WanderLust.Models.DataModels;
 using WanderLust.Models.ViewModels;
+using WanderLust.Common;
 
 namespace WanderLust.Service
 {
@@ -42,7 +43,7 @@ namespace WanderLust.Service
         public async Task<bool> UpdateHappyCustomer(HappyCustomerViewModel happyCustomerViewModel)
         {
             HappyCustomer happyCustomer = await db.HappyCustomer.FindAsync(happyCustomerViewModel.HappyCustomerId);
-            if(happyCustomer != null)
+            if (happyCustomer != null)
             {
                 happyCustomer.Title = happyCustomerViewModel.Title;
                 happyCustomer.SubTitle = happyCustomerViewModel.SubTitle;
@@ -54,12 +55,14 @@ namespace WanderLust.Service
                 await db.SaveChangesAsync();
                 return true;
             };
-            return false ;
+            return false;
         }
 
         public async Task<List<HappyCustomerViewModel>> GetHappyCustomer()
         {
-            List<HappyCustomerViewModel> vlm = await db.HappyCustomer.Select(x => (HappyCustomerViewModel)x).ToListAsync();
+            //List<HappyCustomerViewModel> vlm = await db.HappyCustomer.Select(x => (HappyCustomerViewModel)x).ToListAsync();
+            //return vlm;
+            List<HappyCustomerViewModel> vlm = await db.HappyCustomer.Include(x=>x.AspNetUser).Select(x=>(HappyCustomerViewModel)x).ToListAsync();
             return vlm;
         }
     }

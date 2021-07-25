@@ -6734,7 +6734,7 @@ header {
   height: 100%;
 }
 .distance1 .bg .animated-distance span {
-  position: absolute;
+  position: absolute;  
   top: -25px;
   right: -10px;
   font-weight: 700;

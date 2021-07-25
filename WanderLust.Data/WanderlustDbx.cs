@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using System;
 using WanderLust.Models.CommonModels;
 using WanderLust.Models.DataModels;
+using WanderLust.Common;
 
 namespace WanderLust.Data
 {
@@ -45,7 +46,7 @@ namespace WanderLust.Data
 
             mb.Entity<HappyCustomer>(entity =>
             {
-                entity.HasKey(e => new { e.HappyCustomerId });
+                entity.HasKey(e => e.HappyCustomerId);
                 entity.Property(x => x.HappyCustomerId).ValueGeneratedOnAdd();
                 entity.HasOne(x => x.AspNetUser)
                 .WithMany()
@@ -56,6 +57,16 @@ namespace WanderLust.Data
                 e.HasKey(k => k.Id);
                 e.Property(x => x.Id).ValueGeneratedOnAdd();
             });
+
+            mb.Entity<GalleryImages>(entity =>
+            {
+                entity.HasKey(k => k.ImageId);
+            });
+
+            mb.Entity<Category>(e =>
+            {
+                e.HasKey(k => k.CategoryId);
+            });
         }
 
 
@@ -65,6 +76,9 @@ namespace WanderLust.Data
         public DbSet<HappyCustomer> HappyCustomer { get; set; }
 
         public DbSet<ContactUs> ContactUs { get; set; }
+
+        public DbSet<GalleryImages> GalleryImages { get; set; }
+        public DbSet<Category> Category { get; set; }
 
     }
 }

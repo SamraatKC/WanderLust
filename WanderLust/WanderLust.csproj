@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="AutoWrapper.Core" Version="4.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.8" />
@@ -29,6 +33,11 @@
     <ProjectReference Include="..\WanderLust.Data\WanderLust.Data.csproj" />
     <ProjectReference Include="..\WanderLust.Models\WanderLust.Models.csproj" />
     <ProjectReference Include="..\WanderLust.Service\WanderLust.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\Gallery\" />
+    <Folder Include="wwwroot\uploads\NewFolder\" />
   </ItemGroup>
 
 

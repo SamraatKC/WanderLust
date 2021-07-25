@@ -7,7 +7,7 @@ using WanderLust.Data;
 using WanderLust.Models.CommonModels;
 using WanderLust.Models.DataModels;
 using WanderLust.Models.ViewModels;
-
+using WanderLust.Common;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 

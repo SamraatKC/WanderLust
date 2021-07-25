@@ -12,6 +12,7 @@ using WanderLust.Models.CommonModels;
 using WanderLust.Models.DataModels;
 using WanderLust.Models.ViewModels;
 using WanderLust.Service;
+using WanderLust.Common;
 
 namespace WanderLust.Controllers
 {
