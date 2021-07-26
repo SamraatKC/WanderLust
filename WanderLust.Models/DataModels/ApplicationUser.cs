@@ -10,5 +10,7 @@ namespace WanderLust.Models.DataModels
         public string FullName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public bool IsFirstLogin { get; set; }
+        public bool IsPasswordReset { get; set; }
     }
 }
