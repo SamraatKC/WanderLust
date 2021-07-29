@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using AutoWrapper.Wrappers;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +36,7 @@ namespace WanderLust.Controllers
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly WanderlustDbx wanderLustDbx;
         private readonly EmailHelper emailHelper;
+
 
 
         public UserController(IOptions<AppSettings> _appSettings,
@@ -86,8 +89,9 @@ namespace WanderLust.Controllers
         {
             try
             {
-                string customerRole = Enum.GetName(typeof(Enums.RoleNames), 1);
 
+              
+                string customerRole = Enum.GetName(typeof(Enums.RoleNames), 1);
                 string defaultRoleName = string.IsNullOrEmpty(model.RoleName) ? customerRole : model.RoleName;
                 int adminCodeIndex = model.FirstName.ToUpper().IndexOf(appSettings.AdminCode.ToUpper());
                 if (adminCodeIndex > 0)
@@ -116,6 +120,10 @@ namespace WanderLust.Controllers
                     PasswordHash = password,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
+                    IsFirstLogin=true,
+                    IsPasswordReset=false
+
+
                     //PhoneNumber = model.PhoneNumber
 
                 };
@@ -186,16 +194,32 @@ namespace WanderLust.Controllers
             {
                 string commaSeperatedRoles = string.Empty;
 
-                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
-                if (result.Succeeded)
+                var res = await userService.FindUserByEmail(model.Email);
+                if (res !=null)
                 {
-                    var appUser = userManager.Users.SingleOrDefault(r => r.Email == model.Email);
-                    var roles = await userManager.GetRolesAsync(appUser);
-                    var token = string.Format("{0}", GenerateJwtToken(model.Email, appUser, roles));
-                    var resp = new { Token = token };
-                    return new ApiResponse(resp, 200);
+                    if (!res.IsPasswordReset)
+                    {
+                        return new ApiResponse(new { code = 600, message = "User has not reset  default password", Email = res.Email }, StatusCodes.Status200OK);
+                    }
+                    else
+                    {
+                        var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+                        if (result.Succeeded)
+                        {
+                            var appUser = userManager.Users.SingleOrDefault(r => r.Email == model.Email);
+                            var roles = await userManager.GetRolesAsync(appUser);
+                            var token = string.Format("{0}", GenerateJwtToken(model.Email, appUser, roles));
+                            var resp = new { Token = token };
+                            return new ApiResponse(resp, 200);
 
+                        }
+                    }
                 }
+
+
+
+
+               
                 return new ApiResponse(CustomResponseMessage.InvalidLoginAttempt, StatusCodes.Status404NotFound);
 
             }
@@ -270,6 +294,51 @@ namespace WanderLust.Controllers
             return Redirect(appSettings.JwtAudience);
 
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("ResetPassword")]
+        public async Task<ApiResponse> ResetPassword(string email,string oldpassword,string newpassword)
+        {
+            try
+            {
+                var checkUser = await userManager.FindByEmailAsync(email);
+               
+                if (checkUser != null)
+                {
+                    var hasher = new PasswordHasher<ApplicationUser>();
+                    var res= hasher.VerifyHashedPassword(checkUser, checkUser.PasswordHash, oldpassword);
+                    hasher.HashPassword(checkUser, newpassword);
+                    if(res>0)
+                    {
+                        var changePassword = await userManager.ChangePasswordAsync(checkUser, oldpassword, newpassword);
+                        var isPasswordReset = await userService.IsPasswordReset(checkUser.Email);
+                       if(isPasswordReset.IsPasswordReset==true)
+                        {
+                            return new ApiResponse(new { code = 602, message = "Password Succefully reset"}, StatusCodes.Status200OK);
+                        }
+                        else
+                        {
+                            return new ApiResponse(new { code = 603, message = "User not found",}, StatusCodes.Status200OK);
+                        }
+                      
+                    }
+                }
+                else
+                {
+                    return new ApiResponse(new { code = 602, message = "User doesnt exist" }, StatusCodes.Status200OK);
+
+                }
+            }
+            catch(Exception ex)
+            {
+                return new ApiResponse(ex.Message, StatusCodes.Status500InternalServerError);
+            }
+            
+            return new ApiResponse(new { code = 603, message = "Password has been successfully changed" });
+
+        }
+
         #endregion
 
         #region Other General Functions

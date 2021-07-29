@@ -25,5 +25,7 @@ namespace WanderLust.Models.ViewModels
             //public virtual ICollection<AspNetUserRole> AspNetUserRoles { get; set; }
 
         }
+        public bool IsFirstLogin { get; set; }
+        public bool IsPasswordReset { get; set; }
     }
 }

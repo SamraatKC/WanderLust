@@ -8,6 +8,7 @@ using WanderLust.Data;
 using WanderLust.Models.CommonModels;
 using WanderLust.Models.DataModels;
 using WanderLust.Common;
+using System.Linq;
 
 namespace WanderLust.Service
 {
@@ -32,10 +33,7 @@ namespace WanderLust.Service
         //    return await db.AspNetRoles.ToListAsync();
         //}
 
-        //public async Task<List<AspNetUser>> GetAllUsersByRoleName(string roleName)
-        //{
-        //    return await db.AspNetUserRoles.Where(x => x.AspNetRole.Name == roleName).Select(x => x.AspNetUser).ToListAsync();
-        //}
+       
 
 
         public async Task<AspNetUser> FindUserById(string id)
@@ -43,5 +41,24 @@ namespace WanderLust.Service
             var res = await db.AspNetUsers.FindAsync(id);
             return res;
         }
+
+        public async Task<AspNetUser> FindUserByEmail(string email)
+        {
+            var res= db.AspNetUsers.Where(x => x.Email == email).FirstOrDefault();
+            return res; ;
+
+        }
+
+        public async Task<AspNetUser> IsPasswordReset(string email)
+        {
+            var res = db.AspNetUsers.Where(x => x.Email == email).FirstOrDefault();
+            if(res!=null)
+            {
+                res.IsPasswordReset = true;
+                await db.SaveChangesAsync();
+            }
+            return res;
+        }
+
     }
 }
