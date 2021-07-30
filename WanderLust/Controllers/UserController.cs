@@ -160,7 +160,7 @@ namespace WanderLust.Controllers
                     #endregion
 
                     var res5 = await userManager.AddToRoleAsync(user, asp_role.Name);
-                    return new ApiResponse(CustomResponseMessage.UserCreated, StatusCodes.Status200OK);
+                    return new ApiResponse(CustomResponseMessage.AccountVerificationLinkSent, StatusCodes.Status200OK);
                 }
                 else
                 {
@@ -312,7 +312,7 @@ namespace WanderLust.Controllers
                     if(res>0)
                     {
                         var changePassword = await userManager.ChangePasswordAsync(checkUser, oldpassword, newpassword);
-                        var isPasswordReset = await userService.IsPasswordReset(checkUser.Email);
+                        var isPasswordReset = await userService.IsPasswordReset(email);
                        if(isPasswordReset.IsPasswordReset==true)
                         {
                             return new ApiResponse(new { code = 602, message = "Password Succefully reset"}, StatusCodes.Status200OK);
@@ -339,6 +339,51 @@ namespace WanderLust.Controllers
 
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("ForgotPassword")]
+        public async Task<ApiResponse> ForgotPassword(string email,string newpassword)
+        {
+            try
+            {
+               
+                var user = await userManager.FindByEmailAsync(email);
+                if(user!=null)
+                {
+                    #region Send Forgot Password Email
+                   
+                    string url = appSettings.AllowedOrigin+appSettings.PasswordReset;
+                    string htmlEmailBody = emailHelper.GetEmailBody(appSettings.EmailTemplate_ForgotPassword);
+                    htmlEmailBody = htmlEmailBody.Replace("{FirstName}", user.FirstName);
+                    htmlEmailBody = htmlEmailBody.Replace("{ResetPasswordLink}",url);
+                    emailHelper.SendEmail("Password Reset - Wanderlust Holidays", user.Email, htmlEmailBody);
+                    #endregion
+                    var hasher = new PasswordHasher<ApplicationUser>();                    
+                    hasher.HashPassword(user, newpassword);
+                    var token = await userManager.GeneratePasswordResetTokenAsync(user);
+                    var changePassword = await userManager.ResetPasswordAsync(user, token, newpassword);
+                    if (changePassword!= null)
+                    {
+                        return new ApiResponse(new { code = 604, message = "Password Succefully restored" }, StatusCodes.Status200OK);
+                    }
+                    else
+                    {
+                        return new ApiResponse(new { code = 605, message = "User not found", }, StatusCodes.Status200OK);
+                    }
+                    
+                }
+                return new ApiResponse(new { code = 604, message = "Password Succefully restored" }, StatusCodes.Status200OK);
+
+
+            }
+            catch(Exception ex)
+            {
+                return new ApiResponse(ex.Message, StatusCodes.Status500InternalServerError);
+            }
+            
+        }
+
+       
         #endregion
 
         #region Other General Functions

@@ -27,5 +27,8 @@ namespace WanderLust.Common
         public string NetworkCredentialUserName { get; set; }
         public string NetworkCredentialPassword { get; set; }
         public string EmailTemplate_AccountVerification { get; set; }
+        public string EmailTemplate_ForgotPassword { get; set; }
+
+        public string PasswordReset { get; set; }
     }
 }

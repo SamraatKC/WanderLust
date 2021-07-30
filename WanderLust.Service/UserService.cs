@@ -9,6 +9,7 @@ using WanderLust.Models.CommonModels;
 using WanderLust.Models.DataModels;
 using WanderLust.Common;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 
 namespace WanderLust.Service
 {
@@ -55,6 +56,17 @@ namespace WanderLust.Service
             if(res!=null)
             {
                 res.IsPasswordReset = true;
+                await db.SaveChangesAsync();
+            }
+            return res;
+        }
+
+        public async Task<AspNetUser> ForgotPassword(string email,string newpassword)
+        {
+            var res = db.AspNetUsers.Where(x => x.Email == email).FirstOrDefault();
+            if (res != null)
+            {
+                res.PasswordHash = newpassword;
                 await db.SaveChangesAsync();
             }
             return res;
