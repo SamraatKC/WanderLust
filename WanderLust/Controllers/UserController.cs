@@ -199,7 +199,7 @@ namespace WanderLust.Controllers
                 {
                     if (!res.IsPasswordReset)
                     {
-                        return new ApiResponse(new { code = 600, message = "User has not reset  default password", Email = res.Email }, StatusCodes.Status200OK);
+                        return new ApiResponse(new { code = 600, message = "User has not reset  default password", userid = res.Id }, StatusCodes.Status200OK);
                     }
                     else
                     {
@@ -294,7 +294,6 @@ namespace WanderLust.Controllers
             if (!result.Succeeded)
             {
                 return Redirect(appSettings.JwtAudience);
-
             }
             return Redirect(appSettings.JwtAudience);
 
@@ -302,12 +301,12 @@ namespace WanderLust.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("ResetPassword")]
-        public async Task<ApiResponse> ResetPassword(string email, string oldpassword = null, string newpassword = null)
+        [Route("ResetPassword/{userid}/{newpassword}/{oldpassword}")]
+        public async Task<ApiResponse> ResetPassword(string userid, string newpassword, string oldpassword = null)
         {
             try
             {
-                var checkUser = await userManager.FindByEmailAsync(email);               
+                var checkUser = await userManager.FindByIdAsync(userid);               
                 if (checkUser != null)
                 {    
                     
@@ -319,7 +318,7 @@ namespace WanderLust.Controllers
                         if (res > 0)
                         {
                             var changedPassword = await userManager.ChangePasswordAsync(checkUser, oldpassword, newpassword);
-                            var isPasswordReset = await userService.IsPasswordReset(email);
+                            var isPasswordReset = await userService.IsPasswordReset(userid);
                             if (isPasswordReset.IsPasswordReset == true)
                             {
                                 return new ApiResponse(new { code = 602, message = "Password Succefully reset" }, StatusCodes.Status200OK);
@@ -353,7 +352,7 @@ namespace WanderLust.Controllers
 
                 else
                 {
-                    return new ApiResponse(new { code = 603, message = "User doesnt exist" }, StatusCodes.Status200OK);
+                    return new ApiResponse(new { code = 603, message = "Oops! some error occured" }, StatusCodes.Status200OK);
 
                 }
             }
@@ -367,15 +366,15 @@ namespace WanderLust.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]
-        [Route("ForgotPassword")]
+        [HttpGet]
+        [Route("ForgotPassword/{email}")]
         public async Task<ApiResponse> ForgotPassword(string email)
         {
             try
             {
                 var user = await userManager.FindByEmailAsync(email);
                
-                string url = appSettings.AllowedOrigin + appSettings.PasswordReset;
+                string url = string.Format("{0}{1}/{2}/102", appSettings.AllowedOrigin, appSettings.PasswordReset,user.Id);
                 if(url!=null)
                 {
                     #region Send Forgot Password Email
@@ -385,7 +384,6 @@ namespace WanderLust.Controllers
                     emailHelper.SendEmail("Password Reset - Wanderlust Holidays", user.Email, htmlEmailBody);
                     return new ApiResponse(CustomResponseMessage.PasswordResetLinkSent, StatusCodes.Status200OK);
                     #endregion
-
                 }
                 //if (user != null)
                 //{
