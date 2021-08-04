@@ -10,6 +10,7 @@ namespace WanderLust.Models.CommonModels
         public static string UnableToFindInformation { get { return "Unable to find inforamtion"; } }
         public static string InvalidLoginAttempt { get { return "INVALID LOGIN ATTEMPT"; } }
         public static string UserCreated { get { return "User successfully created"; } }
+        public static string UserNotFound { get { return "User not found"; } }
         public static string RoleCreated { get { return "Role successfully created"; } }
         public static string UserCouldNotBeCreated { get { return "Could not create user"; } }
         public static string PasswordValidationFailed { get { return "Password validation Failed"; } }
@@ -29,5 +30,6 @@ namespace WanderLust.Models.CommonModels
         public static string ContentDeletionError { get { return "The data you are trying to delete has dependency with other table."; } }
         public static string HappyCustomerAdded { get { return "HappyCustomer successfully added"; } }
         public static string AccountVerificationLinkSent { get { return "An account verification link has been sent in your mail."; } }
+        public static string PasswordResetLinkSent { get { return "Password reset link has been sent in your mail."; } }
     }
 }
