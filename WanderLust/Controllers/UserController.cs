@@ -198,8 +198,8 @@ namespace WanderLust.Controllers
                 if (res != null)
                 {
                     var hasher = new PasswordHasher<ApplicationUser>();
-                    hasher.VerifyHashedPassword(res,res.PasswordHash,model.Password);
-                    if (!res.IsPasswordReset && res.PasswordHash != model.Password)
+                    var hashedpassword=hasher.VerifyHashedPassword(res,res.PasswordHash,model.Password);
+                    if (!res.IsPasswordReset && hashedpassword<0)
                     {
                         return new ApiResponse(new { code = 600, message = "User has not reset  default password", userid = res.Id }, StatusCodes.Status200OK);
                     }
@@ -217,7 +217,7 @@ namespace WanderLust.Controllers
                         }
                         else
                         {
-                            return new ApiResponse(StatusCodes.Status500InternalServerError);
+                            return new ApiResponse(CustomResponseMessage.InvalidLoginAttempt, StatusCodes.Status404NotFound);
                         }
                     }
                 }
