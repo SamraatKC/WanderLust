@@ -194,10 +194,11 @@ namespace WanderLust.Controllers
             {
                 string commaSeperatedRoles = string.Empty;
 
-                var res = await userService.FindUserByEmail(model.Email);
+                var res = await userManager.FindByEmailAsync(model.Email);
                 if (res !=null)
                 {
-                    if (!res.IsPasswordReset)
+                   
+                    if (!(res.IsPasswordReset && res.PasswordHash!=model.Password))
                     {
                         return new ApiResponse(new { code = 600, message = "User has not reset  default password", Email = res.Email }, StatusCodes.Status200OK);
                     }
@@ -215,7 +216,7 @@ namespace WanderLust.Controllers
                         }
                         else
                         {
-                            return new ApiResponse( StatusCodes.Status500InternalServerError);
+                            return new ApiResponse(CustomResponseMessage.InvalidLoginAttempt, StatusCodes.Status404NotFound);
                         }
                     }
                 }
