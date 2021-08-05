@@ -50,9 +50,9 @@ namespace WanderLust.Service
 
         }
 
-        public async Task<AspNetUser> IsPasswordReset(string email)
+        public async Task<AspNetUser> IsPasswordReset(string userid)
         {
-            var res = db.AspNetUsers.Where(x => x.Email == email).FirstOrDefault();
+            var res = db.AspNetUsers.Where(x => x.Id == userid).FirstOrDefault();
             if(res!=null)
             {
                 res.IsPasswordReset = true;
