@@ -142,6 +142,7 @@ namespace WanderLust
             services.AddScoped<Service.GalleryService>();
             services.AddScoped<Service.CategoryService>();
             services.AddScoped<EmailHelper>();
+
             services.AddServiceExtension();
             #endregion
         }

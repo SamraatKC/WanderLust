@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,9 +13,11 @@ namespace WanderLust.Common
     public class EmailHelper
     {
         private  AppSettings appSettings;
-        public EmailHelper(IOptions<AppSettings> _appSettings)
+        private ILogger<EmailHelper> logger;
+        public EmailHelper(IOptions<AppSettings> _appSettings, ILogger<EmailHelper> _logger)
         {
             appSettings = _appSettings.Value;
+            logger = _logger;
         }
 
         public  EmailSentStatus SendEmail(string subject, string receiverEmailAddress, string body, List<string> cc = null, List<string> attachmentFilesLocation = null)
@@ -57,15 +60,15 @@ namespace WanderLust.Common
 
         }
 
-        private static void Smtp_SendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        private void Smtp_SendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
             if(e.Error != null)
             {
-                //log Error;
+                logger.LogError(e.Error, e.Error.Message);                
             }
             else
             {
-                //log success;
+               logger.LogInformation("Email Sent");
             }
         }
 

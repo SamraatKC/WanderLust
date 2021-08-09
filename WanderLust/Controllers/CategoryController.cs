@@ -7,6 +7,7 @@ using AutoWrapper.Wrappers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WanderLust.Common;
 using WanderLust.Models.CommonModels;
@@ -22,7 +23,10 @@ namespace WanderLust.Controllers
         private IWebHostEnvironment webHostEnvironment;
         private CategoryService categoryService;
         private IOptions<AppSettings> appSettings;
-        public CategoryController(IWebHostEnvironment _webHostEnvironment, CategoryService _categoryService, IOptions<AppSettings> _appSettings)
+        public CategoryController(IWebHostEnvironment _webHostEnvironment, 
+            CategoryService _categoryService, 
+            IOptions<AppSettings> _appSettings,
+            ILogger<CategoryController> logger)
         {
             webHostEnvironment = _webHostEnvironment;
             appSettings = _appSettings;
