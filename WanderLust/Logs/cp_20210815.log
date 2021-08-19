@@ -1,0 +1,18 @@
+2021-08-15T18:16:01.1630086+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-08-15T18:16:01.3336004+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-08-15T18:16:01.3355690+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "D:\OnGoing Projects\WanderLust\WanderLust"
+2021-08-15T18:32:02.0223397+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-08-15T18:32:02.1193668+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-08-15T18:32:02.1204784+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "D:\OnGoing Projects\WanderLust\WanderLust"
+2021-08-15T18:37:28.5882928+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-08-15T18:37:28.6271961+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-08-15T18:37:28.6315928+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "D:\OnGoing Projects\WanderLust\WanderLust"
+2021-08-15T18:44:04.7152742+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-08-15T18:44:04.7778865+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-08-15T18:44:04.7796088+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "D:\OnGoing Projects\WanderLust\WanderLust"
+2021-08-15T18:44:31.5811319+05:45 [INF] (WanderLust.Common.EmailHelper) Email Sent
+2021-08-15T18:44:32.7143695+05:45 [INF] (WanderLust.Common.EmailHelper) Email Sent
+2021-08-15T18:47:19.5107549+05:45 [INF] (WanderLust.Common.EmailHelper) Email Sent
+2021-08-15T18:47:21.7765476+05:45 [INF] (WanderLust.Common.EmailHelper) Email Sent
+2021-08-15T18:47:38.7410681+05:45 [INF] (WanderLust.Common.EmailHelper) Email Sent
+2021-08-15T18:47:40.3085226+05:45 [INF] (WanderLust.Common.EmailHelper) Email Sent

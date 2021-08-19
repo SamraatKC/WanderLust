@@ -22,8 +22,8 @@ namespace WanderLust.Common
             try
             {
                 string subject = "This is a test subject";
-                string receiverEmailAddress = "test@receiver.com";
-                string body = "test.html";
+                string receiverEmailAddress = "ramkesharthapa15@gmail.com";
+                string body = "<html><head></head><body><h1>Hello World!<br/> Message via <span style='color:red'>hostgator</span>.</h1></body></html>";
                 List<string> attachmentFilesLocation = null;
                 List<string> cc = null;
                 MailMessage mailMsg = new MailMessage();
