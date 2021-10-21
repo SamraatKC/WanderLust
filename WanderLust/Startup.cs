@@ -41,6 +41,41 @@ namespace WanderLust
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers(x => x.AllowEmptyInputInBodyModelBinding = true)
+           .AddNewtonsoftJson(options =>
+               options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            string connectionString = Configuration.GetConnectionString("DefaultConnectionString");
+            services.AddDbContext<ApplicationDbContext>(config =>
+            {
+                config.UseSqlServer(connectionString, b => b.MigrationsAssembly("WanderLust"));
+            });
+            #region configure AspNetIdentity
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 1;
+                options.Password.RequireNonAlphanumeric = false;
+                options.SignIn.RequireConfirmedEmail = true;
+
+            });
+            #endregion
+            #region External Login Authentication
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = Configuration["Authentication:Google:ClientId"];
+                    options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+                })
+                 .AddFacebook(options =>
+                 {
+                     options.AppId = Configuration["Authentication:Facebook:AppId"];
+                     options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                    });
+            #endregion
             var config = Configuration.GetSection("AppSettings").Get<AppSettings>();
             services.Configure<AppSettings>(Configuration.GetSection("ConnectionStrings"));
             services.Configure<AppSettings>(Configuration.GetSection("appSettings"));
@@ -59,9 +94,6 @@ namespace WanderLust
             
             services.AddAuthentication(IISDefaults.AuthenticationScheme);
             #endregion
-            services.AddControllers(x => x.AllowEmptyInputInBodyModelBinding = true)
-            .AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddMvc();
             services.AddSwaggerGen(c =>
             {
@@ -86,28 +118,7 @@ namespace WanderLust
                     {
                         {securityScheme, new string[] { }}
                     });
-            });          
-            string connectionString = Configuration.GetConnectionString("DefaultConnectionString");
-            services.AddDbContext<ApplicationDbContext>(config =>
-            {
-                config.UseSqlServer(connectionString, b => b.MigrationsAssembly("WanderLust"));
-            });
-            #region configure AspNetIdentity
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-            services.Configure<IdentityOptions>(options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 1;
-                options.Password.RequireNonAlphanumeric = false;
-                options.SignIn.RequireConfirmedEmail = true;
-                
-            });
-
-            #endregion
+            });       
             #region configure JWT bearer configuration
 
             var key_phrase = Configuration.GetSection("AppSettings:JwtKey").Value;
@@ -131,10 +142,7 @@ namespace WanderLust
                 });
 
             #endregion
-
-
             #region injection
-
             services.AddScoped<WanderlustDbx>();
             services.AddScoped<Service.ContentService>();
             services.AddScoped<Service.ContactUsService>();
@@ -154,7 +162,11 @@ namespace WanderLust
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseStaticFiles();
+            app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization(); 
             //Redirect non api calls to angular app that will handle routing of the app.    
             app.Use(async (context, next) =>
             {
@@ -167,24 +179,17 @@ namespace WanderLust
                 }
                 await next();
             });
-
             #region use swagger ui, to test the api endpoints
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Wanderlust API");
             });
-            #endregion
-            app.UseAuthentication();
-            app.UseStaticFiles();
-
-            app.UseHttpsRedirection();
+            #endregion                   
             #region Enable Cors
             app.UseCors("CorsPolicy");
             //app.UseMiddleware<CORMiddleware>();
-            #endregion
-            app.UseRouting();         
-            app.UseAuthorization();                    
+            #endregion                         
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

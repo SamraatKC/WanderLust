@@ -36,9 +36,6 @@ namespace WanderLust.Controllers
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly WanderlustDbx wanderLustDbx;
         private readonly EmailHelper emailHelper;
-
-
-
         public UserController(IOptions<AppSettings> _appSettings,
            EmailHelper _emailHelper,
             UserManager<ApplicationUser> _userManager,
@@ -52,7 +49,6 @@ namespace WanderLust.Controllers
             signInManager = _signInManager;
             roleManager = _roleManager;
             wanderLustDbx = new WanderlustDbx(_appSettings);
-
         }
 
         #region Specific ASPNETIDENTITY Methods
@@ -89,8 +85,6 @@ namespace WanderLust.Controllers
         {
             try
             {
-
-
                 string customerRole = Enum.GetName(typeof(Enums.RoleNames), 1);
                 string defaultRoleName = string.IsNullOrEmpty(model.RoleName) ? customerRole : model.RoleName;
                 int adminCodeIndex = model.FirstName.ToUpper().IndexOf(appSettings.AdminCode.ToUpper());
@@ -213,7 +207,6 @@ namespace WanderLust.Controllers
                             var token = string.Format("{0}", GenerateJwtToken(model.Email, appUser, roles));
                             var resp = new { Token = token };
                             return new ApiResponse(resp, 200);
-
                         }
                         else
                         {
@@ -221,8 +214,6 @@ namespace WanderLust.Controllers
                         }
                     }
                 }
-
-
                 else
                 {
 
@@ -235,8 +226,6 @@ namespace WanderLust.Controllers
                 return new ApiResponse(ex.Message, StatusCodes.Status500InternalServerError);
             }
         }
-
-
         private object GenerateJwtToken(string email, ApplicationUser user, IList<string> roles)
         {
             var claims = new List<Claim>
@@ -424,38 +413,99 @@ namespace WanderLust.Controllers
 
         }
 
-
-        #endregion
-
-        #region Other General Functions
-        //[HttpGet]
-        //[Route("GetAllUsers")]
-        //public async Task<List<AspNetUser>> GetAllUsers()
+        //[Route("ExternalLogin")]
+        //public IActionResult ExternalLogin(string provider, string returnUrl)
         //{
-        //    return await userService.GetAllUsers();
+        //    var redirectUrl = Url.Action(nameof(ExternalLoginCallBack), "User", new { returnUrl });
+        //    var properties = signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+        //    return new ChallengeResult(provider, properties);
         //}
 
-        //[HttpGet]
-        //[Route("FindAllRoles")]
-        //public async Task<ApiResponse> FindAllRoles(string id)
+        //[Route("ExternalLoginCallBack")]
+        //public async Task<ApiResponse> ExternalLoginCallBack(string returnUrl = null, string remoteError = null)
         //{
-        //    try
+        //    returnUrl = returnUrl ?? Url.Content("~/");
+        //    LoginViewModel loginViewModel = new LoginViewModel
         //    {
-        //        var userDetail = await userService.FindUserById(id);
-        //        if (userDetail != null)
-        //        {
-        //            return new ApiResponse(userDetail, 200);
-        //        }
-        //        return new ApiResponse(CustomResponseMessage.UnableToFindInformation, StatusCodes.Status404NotFound);
+        //        ReturnUrl = returnUrl,
+        //        ExternalLogin = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+        //    };
+        //    if (remoteError != null)
+        //    {
+        //        return new ApiResponse(new { code = 702, message = "Error Loading External Login Information" });
+        //        //ModelState.AddModelError(string.Empty, $"Error Loading External Login Information");
+
         //    }
-        //    catch (Exception ex)
+        //    var info = await signInManager.GetExternalLoginInfoAsync();
+        //    if (info == null)
         //    {
+        //        return new ApiResponse(new { code = 702, message = "Error Loading External Login Information" });
+        //        //ModelState.AddModelError(string.Empty, $"Error Loading External Login Information");
+
+        //    }
+        //    var signInResult = await signInManager.ExternalLoginSignInAsync(
+        //    info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+        //    if (signInResult.Succeeded)
+        //    {
+        //        return new ApiResponse(new { code = 700, message = "You have successfully signed in"}, StatusCodes.Status200OK);
+        //        //return Redirect("http://localhost:64773/LoggedIn.html");
+        //    }
+        //    else
+        //    {
+        //        var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+        //        if (email != null)
+        //        {
+        //            var user = await userManager.FindByEmailAsync(email);
+        //            if (user == null)
+        //            {
+        //                user = new ApplicationUser
+        //                {
+        //                    UserName = info.Principal.FindFirstValue(ClaimTypes.Email),
+        //                    Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+        //                };
+        //                await userManager.CreateAsync(user);
+        //            }
+        //            await userManager.AddLoginAsync(user, info);
+        //            await signInManager.SignInAsync(user, isPersistent: false);
+        //            return new ApiResponse(new { code = 701, message = "You have successfully logged in" }, StatusCodes.Status200OK);
+        //            //return Redirect("http://localhost:64773/LoggedIn.html");
+        //        }
         //        return new ApiResponse(CustomResponseMessage.InternalServerError, StatusCodes.Status500InternalServerError);
         //    }
         //}
 
-        #endregion
+            #endregion
+        
+
+            #region Other General Functions
+            //[HttpGet]
+            //[Route("GetAllUsers")]
+            //public async Task<List<AspNetUser>> GetAllUsers()
+            //{
+            //    return await userService.GetAllUsers();
+            //}
+
+            //[HttpGet]
+            //[Route("FindAllRoles")]
+            //public async Task<ApiResponse> FindAllRoles(string id)
+            //{
+            //    try
+            //    {
+            //        var userDetail = await userService.FindUserById(id);
+            //        if (userDetail != null)
+            //        {
+            //            return new ApiResponse(userDetail, 200);
+            //        }
+            //        return new ApiResponse(CustomResponseMessage.UnableToFindInformation, StatusCodes.Status404NotFound);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        return new ApiResponse(CustomResponseMessage.InternalServerError, StatusCodes.Status500InternalServerError);
+            //    }
+            //}
+
+            #endregion
 
 
-    }
+        }
 }

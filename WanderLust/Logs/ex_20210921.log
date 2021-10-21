@@ -1,0 +1,402 @@
+2021-09-21T20:18:06.0209231+05:45 [ERR] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: StatusCode cannot be set because the response has already started.
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ThrowResponseAlreadyStartedException(String name)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_StatusCode(Int32 value)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.RespondWithIndexHtml(HttpResponse response)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-09-21T20:18:06.7351927+05:45 [WRN] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) The response has already started, the error page middleware will not be executed.
+2021-09-21T20:18:06.7753027+05:45 [ERR] (Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer) Connection ID ""17726168134940885046"", Request ID ""80000037-0000-f600-b63f-84710c7967bb"": An unhandled exception was thrown by the application.
+System.InvalidOperationException: StatusCode cannot be set because the response has already started.
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ThrowResponseAlreadyStartedException(String name)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_StatusCode(Int32 value)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.RespondWithIndexHtml(HttpResponse response)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContextOfT`1.ProcessRequestAsync()
+2021-09-21T20:18:08.4496514+05:45 [ERR] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: StatusCode cannot be set because the response has already started.
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ThrowResponseAlreadyStartedException(String name)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.ApplyResponseHeaders(Int32 statusCode)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.SendAsync()
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.ServeStaticFile(HttpContext context, RequestDelegate next)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-09-21T20:18:08.4550884+05:45 [WRN] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) The response has already started, the error page middleware will not be executed.
+2021-09-21T20:18:08.5784934+05:45 [ERR] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: StatusCode cannot be set because the response has already started.
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ThrowResponseAlreadyStartedException(String name)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.ApplyResponseHeaders(Int32 statusCode)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.SendAsync()
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.ServeStaticFile(HttpContext context, RequestDelegate next)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-09-21T20:18:08.5785792+05:45 [ERR] (Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer) Connection ID ""17654110549492891683"", Request ID ""80000024-0002-f500-b63f-84710c7967bb"": An unhandled exception was thrown by the application.
+System.InvalidOperationException: StatusCode cannot be set because the response has already started.
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ThrowResponseAlreadyStartedException(String name)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.ApplyResponseHeaders(Int32 statusCode)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.SendAsync()
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.ServeStaticFile(HttpContext context, RequestDelegate next)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContextOfT`1.ProcessRequestAsync()
+2021-09-21T20:18:08.5799175+05:45 [WRN] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) The response has already started, the error page middleware will not be executed.
+2021-09-21T20:18:08.5825967+05:45 [ERR] (Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer) Connection ID ""17726168143530819599"", Request ID ""80000010-0002-f600-b63f-84710c7967bb"": An unhandled exception was thrown by the application.
+System.InvalidOperationException: StatusCode cannot be set because the response has already started.
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ThrowResponseAlreadyStartedException(String name)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.ApplyResponseHeaders(Int32 statusCode)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.SendAsync()
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.ServeStaticFile(HttpContext context, RequestDelegate next)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContextOfT`1.ProcessRequestAsync()
+2021-09-21T20:18:10.1309802+05:45 [ERR] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Response already started
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.EvaluateAndApplyPolicy(HttpContext context, CorsPolicy corsPolicy)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context, ICorsPolicyProvider corsPolicyProvider)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass4_1.<UseMiddleware>b__2(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-09-21T20:18:10.3086570+05:45 [ERR] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Response already started
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.EvaluateAndApplyPolicy(HttpContext context, CorsPolicy corsPolicy)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context, ICorsPolicyProvider corsPolicyProvider)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass4_1.<UseMiddleware>b__2(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.<Invoke>g__AwaitMatcher|8_0(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task`1 matcherTask)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-09-21T20:18:10.3506703+05:45 [ERR] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Response already started
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.EvaluateAndApplyPolicy(HttpContext context, CorsPolicy corsPolicy)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context, ICorsPolicyProvider corsPolicyProvider)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass4_1.<UseMiddleware>b__2(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.<Invoke>g__AwaitMatcher|8_0(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task`1 matcherTask)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-09-21T20:18:10.4687858+05:45 [ERR] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: StatusCode cannot be set because the response has already started.
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ThrowResponseAlreadyStartedException(String name)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.ApplyResponseHeaders(Int32 statusCode)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.SendAsync()
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.ServeStaticFile(HttpContext context, RequestDelegate next)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-09-21T20:18:10.4736987+05:45 [WRN] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) The response has already started, the error page middleware will not be executed.
+2021-09-21T20:18:10.4910034+05:45 [WRN] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) The response has already started, the error page middleware will not be executed.
+2021-09-21T20:18:10.4864622+05:45 [WRN] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) The response has already started, the error page middleware will not be executed.
+2021-09-21T20:18:10.4948212+05:45 [ERR] (Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer) Connection ID ""18014398519682531400"", Request ID ""80000049-0002-fa00-b63f-84710c7967bb"": An unhandled exception was thrown by the application.
+System.InvalidOperationException: StatusCode cannot be set because the response has already started.
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ThrowResponseAlreadyStartedException(String name)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.ApplyResponseHeaders(Int32 statusCode)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.SendAsync()
+   at Microsoft.AspNetCore.StaticFiles.StaticFileContext.ServeStaticFile(HttpContext context, RequestDelegate next)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContextOfT`1.ProcessRequestAsync()
+2021-09-21T20:18:10.4946547+05:45 [ERR] (Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer) Connection ID ""17870283327311708240"", Request ID ""80000051-0001-f800-b63f-84710c7967bb"": An unhandled exception was thrown by the application.
+System.InvalidOperationException: Response already started
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.EvaluateAndApplyPolicy(HttpContext context, CorsPolicy corsPolicy)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context, ICorsPolicyProvider corsPolicyProvider)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass4_1.<UseMiddleware>b__2(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContextOfT`1.ProcessRequestAsync()
+2021-09-21T20:18:10.4888662+05:45 [WRN] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) The response has already started, the error page middleware will not be executed.
+2021-09-21T20:18:10.4964693+05:45 [ERR] (Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer) Connection ID ""17798225733273780316"", Request ID ""8000005d-0001-f700-b63f-84710c7967bb"": An unhandled exception was thrown by the application.
+System.InvalidOperationException: Response already started
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.EvaluateAndApplyPolicy(HttpContext context, CorsPolicy corsPolicy)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context, ICorsPolicyProvider corsPolicyProvider)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass4_1.<UseMiddleware>b__2(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.<Invoke>g__AwaitMatcher|8_0(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task`1 matcherTask)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContextOfT`1.ProcessRequestAsync()
+2021-09-21T20:18:10.5023258+05:45 [ERR] (Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer) Connection ID ""18374686481282236505"", Request ID ""8000005a-0000-ff00-b63f-84710c7967bb"": An unhandled exception was thrown by the application.
+System.InvalidOperationException: Response already started
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.EvaluateAndApplyPolicy(HttpContext context, CorsPolicy corsPolicy)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context, ICorsPolicyProvider corsPolicyProvider)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass4_1.<UseMiddleware>b__2(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.<Invoke>g__AwaitMatcher|8_0(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task`1 matcherTask)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContextOfT`1.ProcessRequestAsync()
+2021-09-21T20:18:13.0360496+05:45 [ERR] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: StatusCode cannot be set because the response has already started.
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ThrowResponseAlreadyStartedException(String name)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_StatusCode(Int32 value)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.RespondWithSwaggerJson(HttpResponse response, OpenApiDocument swagger)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-09-21T20:18:13.0384367+05:45 [WRN] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) The response has already started, the error page middleware will not be executed.
+2021-09-21T20:18:13.0452746+05:45 [ERR] (Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer) Connection ID ""17942340917054668891"", Request ID ""8000005c-0000-f900-b63f-84710c7967bb"": An unhandled exception was thrown by the application.
+System.InvalidOperationException: StatusCode cannot be set because the response has already started.
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ThrowResponseAlreadyStartedException(String name)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_StatusCode(Int32 value)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.RespondWithSwaggerJson(HttpResponse response, OpenApiDocument swagger)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContextOfT`1.ProcessRequestAsync()
+2021-09-21T20:18:26.5681197+05:45 [WRN] (Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor) No output formatter was found for content types '["application/json; charset=utf-8", "application/json; charset=utf-8"]' to write the response.
+2021-09-21T20:18:26.8173752+05:45 [ERR] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: StatusCode cannot be set because the response has already started.
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ThrowResponseAlreadyStartedException(String name)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor.ExecuteAsyncCore(ActionContext context, ObjectResult result, Type objectType, Object value)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor.ExecuteAsync(ActionContext context, ObjectResult result)
+   at Microsoft.AspNetCore.Mvc.ObjectResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-09-21T20:18:26.8292159+05:45 [WRN] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) The response has already started, the error page middleware will not be executed.
+2021-09-21T20:18:26.8306337+05:45 [ERR] (Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer) Connection ID ""18158513707758387328"", Request ID ""80000081-0002-fc00-b63f-84710c7967bb"": An unhandled exception was thrown by the application.
+System.InvalidOperationException: StatusCode cannot be set because the response has already started.
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ThrowResponseAlreadyStartedException(String name)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor.ExecuteAsyncCore(ActionContext context, ObjectResult result, Type objectType, Object value)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor.ExecuteAsync(ActionContext context, ObjectResult result)
+   at Microsoft.AspNetCore.Mvc.ObjectResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContextOfT`1.ProcessRequestAsync()
+2021-09-21T20:18:57.8385180+05:45 [WRN] (Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor) No output formatter was found for content types '["application/json; charset=utf-8", "application/json; charset=utf-8"]' to write the response.
+2021-09-21T20:18:58.0455917+05:45 [ERR] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: StatusCode cannot be set because the response has already started.
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ThrowResponseAlreadyStartedException(String name)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor.ExecuteAsyncCore(ActionContext context, ObjectResult result, Type objectType, Object value)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor.ExecuteAsync(ActionContext context, ObjectResult result)
+   at Microsoft.AspNetCore.Mvc.ObjectResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-09-21T20:18:58.0484842+05:45 [WRN] (Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware) The response has already started, the error page middleware will not be executed.
+2021-09-21T20:18:58.0493337+05:45 [ERR] (Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer) Connection ID ""17870283335901642791"", Request ID ""80000028-0003-f800-b63f-84710c7967bb"": An unhandled exception was thrown by the application.
+System.InvalidOperationException: StatusCode cannot be set because the response has already started.
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ThrowResponseAlreadyStartedException(String name)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor.ExecuteAsyncCore(ActionContext context, ObjectResult result, Type objectType, Object value)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor.ExecuteAsync(ActionContext context, ObjectResult result)
+   at Microsoft.AspNetCore.Mvc.ObjectResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at WanderLust.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\hp\source\repos\Wanderlust\WanderLust\Startup.cs:line 180
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContextOfT`1.ProcessRequestAsync()
