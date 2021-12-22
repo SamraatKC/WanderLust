@@ -7,6 +7,7 @@ namespace WanderLust.Models.CommonModels
     public class CustomResponseMessage
     {
         public static string InternalServerError { get { return "Internal server error occured"; } }
+        public static string ContactSystemProvider { get { return "Oops! some error occured while creating your account, please contact system provider."; } }
         public static string UnableToFindInformation { get { return "Unable to find inforamtion"; } }
         public static string InvalidLoginAttempt { get { return "INVALID LOGIN ATTEMPT"; } }
         public static string UserCreated { get { return "User successfully created"; } }

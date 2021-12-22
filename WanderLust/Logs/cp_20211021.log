@@ -1,3 +1,55 @@
 2021-10-21T12:39:12.5158608+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
 2021-10-21T12:39:12.8772458+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
 2021-10-21T12:39:12.8884784+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"
+2021-10-21T13:11:04.3266711+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-10-21T13:11:04.4743413+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-10-21T13:11:04.4766945+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"
+2021-10-21T13:35:10.2285967+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-10-21T13:35:10.3817942+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-10-21T13:35:10.3855451+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"
+2021-10-21T13:35:59.5244683+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-10-21T13:35:59.6439234+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-10-21T13:35:59.6462598+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"
+2021-10-21T13:37:30.2075172+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-10-21T13:37:30.3429512+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-10-21T13:37:30.3468547+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"
+2021-10-21T14:09:25.0548434+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-10-21T14:09:25.1945080+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-10-21T14:09:25.1972048+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"
+2021-10-21T14:13:25.6283686+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-10-21T14:13:25.7904964+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-10-21T14:13:25.7932774+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"
+2021-10-21T14:19:40.4377499+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-10-21T14:19:40.7243772+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-10-21T14:19:40.7270253+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"
+2021-10-21T16:19:22.8831628+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-10-21T16:19:23.1332939+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-10-21T16:19:23.1358088+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"
+2021-10-21T16:51:12.5030616+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-10-21T16:51:12.6541946+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-10-21T16:51:12.6563185+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"
+2021-10-21T17:04:24.8744907+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-10-21T17:04:24.9922186+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-10-21T17:04:24.9946187+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"
+2021-10-21T17:06:16.4046285+05:45 [INF] (WanderLust.Common.EmailHelper) Email Sent
+2021-10-21T17:11:30.7601384+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-10-21T17:11:30.9151210+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-10-21T17:11:30.9175573+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"
+2021-10-21T17:33:45.2059470+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-10-21T17:33:45.3474976+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-10-21T17:33:45.3499436+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"
+2021-10-21T17:34:30.4950704+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-10-21T17:34:30.6127608+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-10-21T17:34:30.6149631+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"
+2021-10-21T17:37:14.2726011+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-10-21T17:37:14.4279778+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-10-21T17:37:14.4427931+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"
+2021-10-21T17:40:10.0617868+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-10-21T17:40:10.2865274+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-10-21T17:40:10.2898308+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"
+2021-10-21T17:57:56.5647294+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-10-21T17:57:56.7412001+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-10-21T17:57:56.7443561+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"
+2021-10-21T18:05:38.4033331+05:45 [INF] (Microsoft.Hosting.Lifetime) Application started. Press Ctrl+C to shut down.
+2021-10-21T18:05:38.4834093+05:45 [INF] (Microsoft.Hosting.Lifetime) Hosting environment: "Development"
+2021-10-21T18:05:38.4855586+05:45 [INF] (Microsoft.Hosting.Lifetime) Content root path: "C:\Users\hp\source\repos\WanderLust\WanderLust"

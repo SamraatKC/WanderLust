@@ -27379,6 +27379,7 @@ $(document).ready(function() {
 //var initCustomScriptForAngular = function() {};
 $(function() {
   init_custom_script();
+
 });
 
   var init_custom_script = function(){
@@ -27843,7 +27844,6 @@ $(function() {
       }
     }
   }
-
 
   
 ;/*!

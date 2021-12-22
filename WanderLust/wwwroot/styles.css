@@ -13,7 +13,7 @@
  * -------------------------- */
 @font-face {
     font-family: 'FontAwesome';
-    src: url('fontawesome-webfont.eot?v=4.1.0');
+    /* src: url('../fonts/fontawesome-webfont.eot?v=4.1.0'); */
     src: url('fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'), url('fontawesome-webfont.woff?v=4.1.0') format('woff'), url('fontawesome-webfont.ttf?v=4.1.0') format('truetype'), url('fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
     font-weight: normal;
     font-style: normal;
@@ -4785,6 +4785,14 @@ body .ui-tooltip {
 /* You can add global styles to this file, and also import other style files */
 /*@import '~bootstrap/dist/css/bootstrap.min.css';*/
 /* GOOGLE FONTS */
+:root{
+--primary-color:#1cbbb4;
+--background:#fafafa;
+--button-hover-background: #fb000d;
+--button-hover-color: #fff;
+--navbar-color:#8C8C8C;
+--button-alternate-color: #FA010E;
+}
 /* Global properties ======================================================== */
 a[href^="tel:"] {
   color: inherit;
@@ -4832,10 +4840,20 @@ body {
 .visible {
   visibility: visible;
 }
+.btn-toolbar-wander{
+  list-style: none;
+  display: block;
+  padding:0;
+}
+.btn-toolbar-wander li
+{
+  display: inline-block;
+  margin: 0 5px;
+}
 /* ============================= header ====================== */
 .top1_wrapper {
   background: #fafafa;
-  border-top: 3px solid #1cbbb4;
+  /* border-top: 3px solid #1cbbb4; */
   padding-top: 13px;
   padding-bottom: 13px;
 }
@@ -4973,7 +4991,7 @@ body {
 .social4 li a:hover {
   color: #1cbbb4;
 }
-.lang1 {
+/* .lang1 {
   float: right;
   border-right: 1px solid #ebebeb;
   border-left: 1px solid #ebebeb;
@@ -5004,7 +5022,7 @@ body {
   display: inline-block;
   width: 18px;
   height: 12px;
-  background: url('flag_en.png') 0 0 no-repeat;
+  background: url(./assets/images/flag_en.png) 0 0 no-repeat;
   vertical-align: top;
   margin-top: 3px;
   margin-right: 5px;
@@ -5014,9 +5032,10 @@ body {
   width: 10px;
   height: 6px;
   border: none;
-  background: url('arr0.png');
+  background: url(./assets/images/arr0.png);
   margin-left: 10px;
 }
+
 .lang1 .dropdown-menu {
   min-width: 100%;
   margin: 0;
@@ -5045,17 +5064,17 @@ body {
   display: inline-block;
   width: 18px;
   height: 12px;
-  background: url('flag_en.png') 0 0 no-repeat;
+  background: url(./assets/images/flag_en.png) 0 0 no-repeat;
   vertical-align: top;
   margin-top: 3px;
   margin-right: 5px;
 }
 .lang1 .dropdown-menu a.ge:before {
-  background: url('flag_ge.png') 0 0 no-repeat;
+  background: url(./assets/images/flag_ge.png) 0 0 no-repeat;
 }
 .lang1 .dropdown-menu a.ru:before {
-  background: url('flag_ru.png') 0 0 no-repeat;
-}
+  background: url(./assets/images/flag_ru.png) 0 0 no-repeat;
+} */
 .top2_wrapper {
   position: relative;
   background: #fff;
@@ -8425,10 +8444,14 @@ h5 {
   box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.2) inset;
   moz-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.2) inset;
   -webkit-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.2) inset;
+  min-width: 8em;
 }
 .btn-default.btn-cf-submit:hover {
   color: #fff;
   background: #fb000d;
+}
+.btn-default.btn-cf-submit, btn-center-default{
+  margin:0 auto;
 }
 /*================= Contacts3 =========================*/
 #note3 {
@@ -8512,7 +8535,7 @@ h5 {
 /* Large desktop */
 @media (min-width: 2560px) {
   #slider_wrapper {
-    background: url('slider_large.jpg') top center no-repeat;
+    /*background: url(./assets/images/slider_large.jpg) top center no-repeat;*/
     background-size: cover;
     padding-bottom: 280px;
     padding-top: 370px;

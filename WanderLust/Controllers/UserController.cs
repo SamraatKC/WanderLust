@@ -87,22 +87,22 @@ namespace WanderLust.Controllers
             {
                 string customerRole = Enum.GetName(typeof(Enums.RoleNames), 1);
                 string defaultRoleName = string.IsNullOrEmpty(model.RoleName) ? customerRole : model.RoleName;
-                int adminCodeIndex = model.FirstName.ToUpper().IndexOf(appSettings.AdminCode.ToUpper());
-                if (adminCodeIndex > 0)
-                {
-                    string adminRole = Enum.GetName(typeof(Enums.RoleNames), 0);
-                    defaultRoleName = string.IsNullOrEmpty(model.RoleName) ? adminRole : model.RoleName;
-                    model.FirstName = model.FirstName.Substring(0, adminCodeIndex);
-                }
+                //int adminCodeIndex = model.FirstName.ToUpper().IndexOf(appSettings.AdminCode.ToUpper());
+                //if (adminCodeIndex > 0)
+                //{
+                //    string adminRole = Enum.GetName(typeof(Enums.RoleNames), 0);
+                //    defaultRoleName = string.IsNullOrEmpty(model.RoleName) ? adminRole : model.RoleName;
+                //    model.FirstName = model.FirstName.Substring(0, adminCodeIndex);
+                //}
                 #region if role is not found or duplicate user found then return error message
                 var asp_role = await roleManager.FindByNameAsync(defaultRoleName);
-                var asp_user = await userManager.FindByEmailAsync(model.Email);
+                ///var asp_user = await userManager.FindByEmailAsync(model.Email);
                 if (asp_role == null)
                 {
                     return new ApiResponse(CustomResponseMessage.RoleNotFound, StatusCodes.Status204NoContent);
                 }
-                if (asp_user != null)
-                    return new ApiResponse(CustomResponseMessage.DuplicateUser, StatusCodes.Status406NotAcceptable);
+                //if (asp_user != null)
+                    //return new ApiResponse(CustomResponseMessage.DuplicateUser, StatusCodes.Status406NotAcceptable);
                 #endregion
 
                 #region construct ApplicationUser
@@ -138,7 +138,7 @@ namespace WanderLust.Controllers
                     //    body: $"Hello ! You have been successfully registered");
                     //Console.WriteLine(message.Sid);
                     #endregion
-
+                    var addusertorole = await userManager.AddToRoleAsync(user, asp_role.Name);
                     #region Send Email Along With Password
                     string code = userManager.GenerateEmailConfirmationTokenAsync(user).Result;
                     code = System.Web.HttpUtility.UrlEncode(code);
@@ -153,7 +153,7 @@ namespace WanderLust.Controllers
                     emailHelper.SendEmail("Account Activation - Wanderlust Holidays", model.Email, htmlEmailBody);
                     #endregion
 
-                    var res5 = await userManager.AddToRoleAsync(user, asp_role.Name);
+                    //var res5 = await userManager.AddToRoleAsync(user, asp_role.Name);
                     return new ApiResponse(CustomResponseMessage.AccountVerificationLinkSent, StatusCodes.Status200OK);
                 }
                 else
@@ -167,7 +167,7 @@ namespace WanderLust.Controllers
                         }
                         exceptionMessage += "}";
                         var responseMessage = JsonConvert.SerializeObject(exceptionMessage);
-                        return new ApiResponse(CustomResponseMessage.PasswordValidationFailed, responseMessage, StatusCodes.Status500InternalServerError);
+                        return new ApiResponse(CustomResponseMessage.ContactSystemProvider, responseMessage, StatusCodes.Status500InternalServerError);
                     }
                 }
                 #endregion
@@ -193,9 +193,9 @@ namespace WanderLust.Controllers
                 {
                     var hasher = new PasswordHasher<ApplicationUser>();
                     var hashedpassword=hasher.VerifyHashedPassword(res,res.PasswordHash,model.Password);
-                    if (!res.IsPasswordReset && hashedpassword<0)
+                    if (res.IsPasswordReset==false && hashedpassword<0)
                     {
-                        return new ApiResponse(new { code = 600, message = "User has not reset  default password", userid = res.Id }, StatusCodes.Status200OK);
+                        return new ApiResponse(new { code = 600, message = "User has not reset  default password", userid = res.Id }, StatusCodes.Status406NotAcceptable);
                     }
                     else
                     {
@@ -279,7 +279,7 @@ namespace WanderLust.Controllers
             }
             if (result.Succeeded)
             {
-                return Redirect(appSettings.ActivatedPostUrl);
+                return Redirect(appSettings.PasswordReset);
 
             }
             if (!result.Succeeded)
@@ -447,7 +447,7 @@ namespace WanderLust.Controllers
         //    info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
         //    if (signInResult.Succeeded)
         //    {
-        //        return new ApiResponse(new { code = 700, message = "You have successfully signed in"}, StatusCodes.Status200OK);
+        //        return new ApiResponse(new { code = 700, message = "You have successfully signed in" }, StatusCodes.Status200OK);
         //        //return Redirect("http://localhost:64773/LoggedIn.html");
         //    }
         //    else
@@ -474,38 +474,38 @@ namespace WanderLust.Controllers
         //    }
         //}
 
-            #endregion
-        
-
-            #region Other General Functions
-            //[HttpGet]
-            //[Route("GetAllUsers")]
-            //public async Task<List<AspNetUser>> GetAllUsers()
-            //{
-            //    return await userService.GetAllUsers();
-            //}
-
-            //[HttpGet]
-            //[Route("FindAllRoles")]
-            //public async Task<ApiResponse> FindAllRoles(string id)
-            //{
-            //    try
-            //    {
-            //        var userDetail = await userService.FindUserById(id);
-            //        if (userDetail != null)
-            //        {
-            //            return new ApiResponse(userDetail, 200);
-            //        }
-            //        return new ApiResponse(CustomResponseMessage.UnableToFindInformation, StatusCodes.Status404NotFound);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        return new ApiResponse(CustomResponseMessage.InternalServerError, StatusCodes.Status500InternalServerError);
-            //    }
-            //}
-
-            #endregion
+        #endregion
 
 
-        }
+        #region Other General Functions
+        //[HttpGet]
+        //[Route("GetAllUsers")]
+        //public async Task<List<AspNetUser>> GetAllUsers()
+        //{
+        //    return await userService.GetAllUsers();
+        //}
+
+        //[HttpGet]
+        //[Route("FindAllRoles")]
+        //public async Task<ApiResponse> FindAllRoles(string id)
+        //{
+        //    try
+        //    {
+        //        var userDetail = await userService.FindUserById(id);
+        //        if (userDetail != null)
+        //        {
+        //            return new ApiResponse(userDetail, 200);
+        //        }
+        //        return new ApiResponse(CustomResponseMessage.UnableToFindInformation, StatusCodes.Status404NotFound);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new ApiResponse(CustomResponseMessage.InternalServerError, StatusCodes.Status500InternalServerError);
+        //    }
+        //}
+
+        #endregion
+
+
+    }
 }
