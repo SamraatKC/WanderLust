@@ -44,6 +44,9 @@ msbuild.wrn
 [Ww]wwroot/[Uu]ploads
 [Ww]wwroot/[Uu]ploads/*.*
 WanderLust/wwwroot/Uploads/
+[Ww]wwroot/
+[WWWwww]root/
+[Ll]ogs/
 
 #ignore appsettings.json
 [Aa]ppsettings.json
