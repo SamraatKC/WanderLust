@@ -170,7 +170,7 @@ namespace WanderLust
             //Redirect non api calls to angular app that will handle routing of the app.    
             app.Use(async (context, next) =>
             {
-                await next();
+                //await next();
                 if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
                 {
                     context.Request.Path = "/index.html";

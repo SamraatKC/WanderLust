@@ -30,5 +30,6 @@ namespace WanderLust.Common
         public string EmailTemplate_ForgotPassword { get; set; }
 
         public string PasswordReset { get; set; }
+        public bool EnableSSL { get; set; }
     }
 }
