@@ -149,6 +149,9 @@ namespace WanderLust
             services.AddScoped<Service.HappyCustomerService>();
             services.AddScoped<Service.GalleryService>();
             services.AddScoped<Service.CategoryService>();
+            services.AddScoped<Service.AboutOurCompanyService>();
+            services.AddScoped<Service.OurTeamService>();
+            services.AddScoped<Service.TeamMemberService>();
             services.AddScoped<EmailHelper>();
             services.AddScoped<HostgatorEmailHelper>();
             services.AddServiceExtension();

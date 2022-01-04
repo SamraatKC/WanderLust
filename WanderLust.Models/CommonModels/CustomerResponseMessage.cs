@@ -32,5 +32,12 @@ namespace WanderLust.Models.CommonModels
         public static string HappyCustomerAdded { get { return "HappyCustomer successfully added"; } }
         public static string AccountVerificationLinkSent { get { return "An account verification link has been sent in your mail."; } }
         public static string PasswordResetLinkSent { get { return "Password reset link has been sent in your mail."; } }
+        public static string OurTeamDeleted { get { return "OurTeam successfully deleted"; } }
+        public static string OurTeamDeletionError { get { return "The data you are trying to delete has foreign key reference with other table."; } }
+        public static string AboutOurCompanyDeleted { get { return "AboutOurCompany successfully deleted"; } }
+        public static string AboutOurCompanyDeletionError { get { return "The data you are trying to delete has foreign key reference with other table."; } }
+        public static string TeamMemberDeleted { get { return "Team Member successfully deleted"; } }
+        public static string TeamMemberDeletionError { get { return "The data you are trying to delete has foreign key reference with other table."; } }
+
     }
 }

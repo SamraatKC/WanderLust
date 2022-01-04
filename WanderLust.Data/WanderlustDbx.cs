@@ -29,18 +29,18 @@ namespace WanderLust.Data
 
             mb.Entity<Content>(entity =>
             {
-                entity.HasKey(e => new { e.ContentId });              
+                entity.HasKey(e => new { e.ContentId });
                 entity.HasOne(p => p.Home)
                 .WithMany(p => p.Content)
-                .HasForeignKey(p=>p.HomeIdFK)
+                .HasForeignKey(p => p.HomeIdFK)
                 //.IsRequired(true)
-                .OnDelete(DeleteBehavior.Cascade);                
+                .OnDelete(DeleteBehavior.Cascade);
             });
 
             mb.Entity<Home>(entity =>
             {
                 entity.HasKey(e => new { e.HomeId });
-                entity.Property(x => x.HomeId).ValueGeneratedOnAdd();           
+                entity.Property(x => x.HomeId).ValueGeneratedOnAdd();
                 //entity.HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             });
 
@@ -67,6 +67,14 @@ namespace WanderLust.Data
             {
                 e.HasKey(k => k.CategoryId);
             });
+            mb.Entity<AboutOurCompany>(e =>
+            {
+                e.HasKey(k => k.AboutOurCompanyId);
+            });
+            mb.Entity<OurTeam>(e =>
+            {
+                e.HasKey(k => k.OurTeamId);
+            });
         }
 
 
@@ -79,6 +87,9 @@ namespace WanderLust.Data
 
         public DbSet<GalleryImages> GalleryImages { get; set; }
         public DbSet<Category> Category { get; set; }
+        public DbSet<AboutOurCompany>AboutOurCompany { get; set; }
+        public DbSet<OurTeam> OurTeam { get; set; }
+        public DbSet<TeamMember> TeamMember { get; set; }
 
     }
 }
